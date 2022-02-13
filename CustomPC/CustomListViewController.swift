@@ -14,7 +14,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "登録済み見積もり一覧"
+        self.title = "Customs"
         addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped(_:)))
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
         
