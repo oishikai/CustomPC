@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A9C069827B6736200280671 /* NewCustomViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9C069727B6736200280671 /* NewCustomViewController.storyboard */; };
+		2A9C069A27B676C000280671 /* NewCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C069927B676C000280671 /* NewCustomViewController.swift */; };
 		2AFAE14F27B665D300D74495 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFAE14E27B665D300D74495 /* AppDelegate.swift */; };
 		2AFAE15127B665D300D74495 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFAE15027B665D300D74495 /* SceneDelegate.swift */; };
 		2AFAE15327B665D300D74495 /* CustomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFAE15227B665D300D74495 /* CustomListViewController.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A9C069727B6736200280671 /* NewCustomViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomViewController.storyboard; sourceTree = "<group>"; };
+		2A9C069927B676C000280671 /* NewCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomViewController.swift; sourceTree = "<group>"; };
 		2AFAE14B27B665D300D74495 /* CustomPC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AFAE14E27B665D300D74495 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AFAE15027B665D300D74495 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,10 +109,12 @@
 				2AFAE15027B665D300D74495 /* SceneDelegate.swift */,
 				2AFAE15227B665D300D74495 /* CustomListViewController.swift */,
 				2AFAE15427B665D300D74495 /* Main.storyboard */,
+				2A9C069927B676C000280671 /* NewCustomViewController.swift */,
 				2AFAE15A27B665D400D74495 /* Assets.xcassets */,
 				2AFAE15C27B665D400D74495 /* LaunchScreen.storyboard */,
 				2AFAE15F27B665D400D74495 /* Info.plist */,
 				2AFAE15727B665D300D74495 /* CustomPC.xcdatamodeld */,
+				2A9C069727B6736200280671 /* NewCustomViewController.storyboard */,
 			);
 			path = CustomPC;
 			sourceTree = "<group>";
@@ -234,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A9C069827B6736200280671 /* NewCustomViewController.storyboard in Resources */,
 				2AFAE15E27B665D400D74495 /* LaunchScreen.storyboard in Resources */,
 				2AFAE15B27B665D400D74495 /* Assets.xcassets in Resources */,
 				2AFAE15627B665D300D74495 /* Main.storyboard in Resources */,
@@ -263,6 +270,7 @@
 			files = (
 				2AFAE15327B665D300D74495 /* CustomListViewController.swift in Sources */,
 				2AFAE14F27B665D300D74495 /* AppDelegate.swift in Sources */,
+				2A9C069A27B676C000280671 /* NewCustomViewController.swift in Sources */,
 				2AFAE15127B665D300D74495 /* SceneDelegate.swift in Sources */,
 				2AFAE15927B665D300D74495 /* CustomPC.xcdatamodeld in Sources */,
 			);

@@ -31,11 +31,11 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     }
     
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {
-//        DispatchQueue.main.async {
-//            let storyboard = UIStoryboard(name: "NewCompanyFormViewController", bundle: nil)
-//            let nextVC = storyboard.instantiateViewController(identifier: "NewCompanyFormViewController")as! NewCompanyFormViewController
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 
