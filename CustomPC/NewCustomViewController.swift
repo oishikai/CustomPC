@@ -20,7 +20,11 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 
