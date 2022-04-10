@@ -101,6 +101,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A71B5C42802A61900F636E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2AFAE15427B665D300D74495 /* Main.storyboard */,
+				2A9C069727B6736200280671 /* NewCustomViewController.storyboard */,
+				2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */,
+				2AFAE15C27B665D400D74495 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2A71B5C52802A64200F636E1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2AFAE15227B665D300D74495 /* CustomListViewController.swift */,
+				2A9C069927B676C000280671 /* NewCustomViewController.swift */,
+				2A36E2892802963C0075C952 /* SearchPartsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		2AFAE14227B665D300D74495 = {
 			isa = PBXGroup;
 			children = (
@@ -126,18 +147,13 @@
 		2AFAE14D27B665D300D74495 /* CustomPC */ = {
 			isa = PBXGroup;
 			children = (
+				2A71B5C52802A64200F636E1 /* ViewControllers */,
+				2A71B5C42802A61900F636E1 /* Views */,
 				2AFAE14E27B665D300D74495 /* AppDelegate.swift */,
 				2AFAE15027B665D300D74495 /* SceneDelegate.swift */,
-				2AFAE15227B665D300D74495 /* CustomListViewController.swift */,
-				2AFAE15427B665D300D74495 /* Main.storyboard */,
-				2A9C069927B676C000280671 /* NewCustomViewController.swift */,
 				2AFAE15A27B665D400D74495 /* Assets.xcassets */,
-				2AFAE15C27B665D400D74495 /* LaunchScreen.storyboard */,
 				2AFAE15F27B665D400D74495 /* Info.plist */,
 				2AFAE15727B665D300D74495 /* CustomPC.xcdatamodeld */,
-				2A9C069727B6736200280671 /* NewCustomViewController.storyboard */,
-				2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */,
-				2A36E2892802963C0075C952 /* SearchPartsViewController.swift */,
 			);
 			path = CustomPC;
 			sourceTree = "<group>";
