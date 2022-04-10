@@ -33,8 +33,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="04H-Xh-Rmw">
-                                <rect key="frame" x="0.0" y="88" width="414" height="474"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="556"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="NaS-NO-g3u"/>
+                                    <constraint firstAttribute="height" constant="556" id="ho2-Tw-mcc"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="partsCell" id="5nZ-Iw-wOf">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
@@ -50,20 +54,23 @@
                                     <outlet property="delegate" destination="0OE-Hy-lbJ" id="5FJ-Xu-luG"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="カスタムタイトルを入力" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0JQ-vv-dWy">
-                                <rect key="frame" x="77" y="584" width="259" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNg-Eq-d4D">
+                                <rect key="frame" x="184" y="676" width="46" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="Jbg-1X-vXC"/>
+                                    <constraint firstAttribute="width" constant="46" id="s7r-Eb-W2Q"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="neC-FC-Epy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="neC-FC-Epy" firstAttribute="bottom" secondItem="04H-Xh-Rmw" secondAttribute="bottom" constant="300" id="L4J-kw-zd7"/>
-                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="top" secondItem="neC-FC-Epy" secondAttribute="top" id="Vrb-Tu-D6B"/>
-                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="trailing" secondItem="neC-FC-Epy" secondAttribute="trailing" id="biG-Uc-ebO"/>
-                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="leading" secondItem="neC-FC-Epy" secondAttribute="leading" id="xGE-1F-pGg"/>
+                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="leading" secondItem="neC-FC-Epy" secondAttribute="leading" id="8Td-0D-asP"/>
+                            <constraint firstItem="fNg-Eq-d4D" firstAttribute="centerX" secondItem="7eX-pn-4RL" secondAttribute="centerX" id="GTg-wL-u6K"/>
+                            <constraint firstItem="fNg-Eq-d4D" firstAttribute="top" secondItem="04H-Xh-Rmw" secondAttribute="bottom" constant="32" id="WNf-gy-adf"/>
+                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="trailing" secondItem="neC-FC-Epy" secondAttribute="trailing" id="idb-qN-NdU"/>
+                            <constraint firstItem="04H-Xh-Rmw" firstAttribute="top" secondItem="neC-FC-Epy" secondAttribute="top" id="rr8-fB-Z6c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SAh-8x-FZQ"/>
