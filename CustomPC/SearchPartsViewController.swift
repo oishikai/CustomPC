@@ -7,6 +7,9 @@
 
 import UIKit
 
+import Alamofire
+import Kanna
+
 class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var searchTable: UITableView!
