@@ -4,14 +4,14 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     @IBOutlet weak var selectTable: UITableView!
     
-    private let parts = [PcParts.cpu, PcParts.cpuCooler, PcParts.memory, PcParts.graphicsCard, PcParts.ssd, PcParts.hdd, PcParts.pcCase, PcParts.powerUnit, PcParts.caseFan]
+    private let parts = [PcParts.cpu, PcParts.cpuCooler, PcParts.memory, PcParts.graphicsCard, PcParts.ssd, PcParts.hdd, PcParts.pcCase, PcParts.powerUnit, PcParts.caseFan, PcParts.monitor]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return parts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
