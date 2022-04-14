@@ -4,7 +4,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     @IBOutlet weak var selectTable: UITableView!
     
-    private let parts = ["CPU", "CPUクーラー", "メモリ", "グラボ/ビデオカード", "SSD", "HDD", "ケース", "電源", "ケースファン"]
+    private let parts = [PcParts.cpu, PcParts.cpuCooler, PcParts.memory, PcParts.graphicsCard, PcParts.ssd, PcParts.hdd, PcParts.pcCase, PcParts.powerUnit, PcParts.caseFan]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,12 +17,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "partsCell", for: indexPath)
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.textLabel?.text = parts[indexPath.row]
+        cell.textLabel?.text = parts[indexPath.row].rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SearchParts.getPartsTitleFirst { titles in
+        SearchParts.getPartsTitleFirst(parts: parts[indexPath.row]) { titles in
             DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
