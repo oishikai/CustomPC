@@ -17,31 +17,26 @@ class SearchParts {
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
                     var titles = [String]()
-                    var category = [String]()
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
-                    // パーツの名前取得
+                    // パーツの名前取得 選択したカテゴリー以外は除く
                     for i in 1 ... (elements) {
                         let title = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
-                        for link in doc.xpath(title) {
-                            titles.append(link.text ?? "")
+                        let category = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
+                        for ctg in doc.xpath(category) {
+                            if let text = ctg.text {
+                                if (text.contains(parts.rawValue)){
+                                    for link in doc.xpath(title) {
+                                        titles.append(link.text ?? "")
+                                    }
+                                }else{
+                                    print("選択されていないカテゴリ : " + text)
+                                }
+                            }
                         }
                     }
-                    
-                    for i in 1 ... (elements) {
-                        let title = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
-                        for link in doc.xpath(title) {
-                            category.append(link.text ?? "")
-                        }
-                    }
-                    print(titles)
-                    print(category)
                     completionHandler(titles)
-                }else {
-                    print("doc was null")
                 }
-            }else {
-                print("html was null")
             }
         }
     }

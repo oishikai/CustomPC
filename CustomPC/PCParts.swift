@@ -15,9 +15,10 @@ enum PcParts: String {
     case ssd = "SSD"
     case hdd = "ハードディスク・HDD"
     case pcCase = "PCケース"
-    case powerUnit = "電源ユニット"
+    case powerUnit = "電源ユニッ"
     case caseFan = "ケースファン"
     case monitor = "PCモニター・液晶ディスプレイ"
+    case testParts = "テスト"
     
     func startPageUrl() -> String{
         switch self {
@@ -41,6 +42,8 @@ enum PcParts: String {
             return "https://kakaku.com/search_results/%93d%8C%B9%83%86%83j%83b%83g/"
         case .monitor:
             return "https://kakaku.com/search_results/%83%82%83j%83%5E%81%5B/"
+        case .testParts:
+            return "https://kakaku.com/search_results/%93d%8C%B9/"
         }
     }
 }
