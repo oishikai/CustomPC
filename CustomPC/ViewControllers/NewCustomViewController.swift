@@ -4,26 +4,31 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     @IBOutlet weak var selectTable: UITableView!
     
+    private let parts = [PcParts.cpu, PcParts.cpuCooler, PcParts.memory, PcParts.graphicsCard, PcParts.ssd, PcParts.hdd, PcParts.pcCase, PcParts.powerUnit, PcParts.caseFan, PcParts.monitor, PcParts.testParts]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return parts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "partsCell", for: indexPath)
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = parts[indexPath.row].rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DispatchQueue.main.async {
+        SearchParts.getPartsTitleFirst(parts: parts[indexPath.row]) { titles in
+            DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
+                nextVC.titles = titles
             self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         }
     }
 }
