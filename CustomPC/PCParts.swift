@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PcParts: String {
+enum category: String {
     case cpu = "CPU"
     case cpuCooler = "CPUクーラー"
     case memory = "メモリー"
@@ -46,4 +46,18 @@ enum PcParts: String {
             return "https://kakaku.com/search_results/%93d%8C%B9/"
         }
     }
+}
+
+class PcParts {
+    
+    private let category: category
+    let maker: String
+    let title: String
+    
+    init(category: category, maker: String, title:String) {
+        self.category = category
+        self.maker = maker
+        self.title = title
+    }
+    
 }

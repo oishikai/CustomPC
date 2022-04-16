@@ -4,7 +4,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     @IBOutlet weak var selectTable: UITableView!
     
-    private let parts = [PcParts.cpu, PcParts.cpuCooler, PcParts.memory, PcParts.graphicsCard, PcParts.ssd, PcParts.hdd, PcParts.pcCase, PcParts.powerUnit, PcParts.caseFan, PcParts.monitor, PcParts.testParts]
+    private let parts = [category.cpu, category.cpuCooler, category.memory, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor, category.testParts]
     
     override func viewDidLoad() {
         super.viewDidLoad()
