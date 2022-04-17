@@ -53,11 +53,12 @@ class PcParts {
     private let category: category
     let maker: String
     let title: String
-    
-    init(category: category, maker: String, title:String) {
+    let price: String
+    init(category: category, maker: String, title:String, price:String) {
         self.category = category
         self.maker = maker
         self.title = title
+        self.price = price
     }
     
 }
