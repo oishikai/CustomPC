@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -70,7 +69,7 @@
             <connections>
                 <outlet property="partsImageView" destination="myS-5i-kvC" id="UhN-4F-ivE"/>
                 <outlet property="partsMakerLabel" destination="wS6-RI-m1W" id="pqi-cM-Y9C"/>
-                <outlet property="partsPriceLavel" destination="N57-JR-tFL" id="8Li-2r-NaT"/>
+                <outlet property="partsPriceLabel" destination="N57-JR-tFL" id="8Li-2r-NaT"/>
                 <outlet property="partsTitleLabel" destination="5Fn-Dc-NXd" id="hv2-Wp-ZL0"/>
             </connections>
             <point key="canvasLocation" x="163.04347826086959" y="59.933035714285708"/>

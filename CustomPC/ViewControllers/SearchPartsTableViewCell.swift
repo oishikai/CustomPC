@@ -32,11 +32,13 @@ class SearchPartsTableViewCell: UITableViewCell {
     @IBOutlet weak var partsImageView: UIImageView!
     @IBOutlet weak var partsMakerLabel: UILabel!
     @IBOutlet weak var partsTitleLabel: UILabel!
-    @IBOutlet weak var partsPriceLavel: UILabel!
+    @IBOutlet weak var partsPriceLabel: UILabel!
     
     static let cellIdentifier = String(describing: SearchPartsTableViewCell.self)
     
-    func setup(title: String) {
-        partsTitleLabel.text = title
+    func setup(parts: PcParts) {
+        partsTitleLabel.text = parts.title
+        partsMakerLabel.text = parts.maker
+        partsPriceLabel.text = parts.price
     }
 }
