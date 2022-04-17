@@ -35,5 +35,8 @@ class SearchPartsTableViewCell: UITableViewCell {
     @IBOutlet weak var partsPriceLavel: UILabel!
     
     static let cellIdentifier = String(describing: SearchPartsTableViewCell.self)
-
+    
+    func setup(title: String) {
+        partsTitleLabel.text = title
+    }
 }
