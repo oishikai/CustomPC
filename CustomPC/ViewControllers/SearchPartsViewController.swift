@@ -19,6 +19,11 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 //        titles = SearchParts.getPartsTitleFirst()
+        
+        let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
+        searchTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
+        
+        searchTable.rowHeight = UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,9 +31,9 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
 //        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.textLabel?.text = "\(titles[indexPath.row])"
+        cell.setup(title: titles[indexPath.row])
         return cell
     }
 

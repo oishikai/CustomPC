@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A2B7660280927B500550054 /* SearchPartsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A2B765F280927B500550054 /* SearchPartsTableViewCell.xib */; };
+		2A2B766228092DCF00550054 /* SearchPartsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */; };
 		2A36E2882802953F0075C952 /* SearchPartsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */; };
 		2A36E28A2802963C0075C952 /* SearchPartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E2892802963C0075C952 /* SearchPartsViewController.swift */; };
 		2A6FA2162806814400B27677 /* PCParts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6FA2152806814400B27677 /* PCParts.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		26170C6A563D0A357B414DE6 /* Pods-CustomPC-CustomPCUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomPC-CustomPCUITests.release.xcconfig"; path = "Target Support Files/Pods-CustomPC-CustomPCUITests/Pods-CustomPC-CustomPCUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2A2B765F280927B500550054 /* SearchPartsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPartsTableViewCell.xib; sourceTree = "<group>"; };
+		2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPartsTableViewCell.swift; sourceTree = "<group>"; };
 		2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPartsViewController.storyboard; sourceTree = "<group>"; };
 		2A36E2892802963C0075C952 /* SearchPartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPartsViewController.swift; sourceTree = "<group>"; };
 		2A6FA2152806814400B27677 /* PCParts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCParts.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 			children = (
 				2AFAE15427B665D300D74495 /* Main.storyboard */,
 				2A9C069727B6736200280671 /* NewCustomViewController.storyboard */,
+				2A2B765F280927B500550054 /* SearchPartsTableViewCell.xib */,
 				2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */,
 				2AFAE15C27B665D400D74495 /* LaunchScreen.storyboard */,
 			);
@@ -120,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				2AFAE15227B665D300D74495 /* CustomListViewController.swift */,
+				2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */,
 				2A9C069927B676C000280671 /* NewCustomViewController.swift */,
 				2A36E2892802963C0075C952 /* SearchPartsViewController.swift */,
 			);
@@ -313,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A2B7660280927B500550054 /* SearchPartsTableViewCell.xib in Resources */,
 				2A36E2882802953F0075C952 /* SearchPartsViewController.storyboard in Resources */,
 				2A9C069827B6736200280671 /* NewCustomViewController.storyboard in Resources */,
 				2AFAE15E27B665D400D74495 /* LaunchScreen.storyboard in Resources */,
@@ -445,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A2B766228092DCF00550054 /* SearchPartsTableViewCell.swift in Sources */,
 				2AFAE15327B665D300D74495 /* CustomListViewController.swift in Sources */,
 				2AFAE14F27B665D300D74495 /* AppDelegate.swift in Sources */,
 				2A9C069A27B676C000280671 /* NewCustomViewController.swift in Sources */,
