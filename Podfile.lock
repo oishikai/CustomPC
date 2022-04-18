@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.5.0)
   - Kanna (5.2.7)
+  - Nuke (10.7.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Kanna
+  - Nuke
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Kanna
+    - Nuke
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
+  Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
 
-PODFILE CHECKSUM: c308adab0fb8e11178a1a7624186ec5effd5e22d
+PODFILE CHECKSUM: 19438ba93dcc1518fdcb9fdf5efd7893ebab3573
 
 COCOAPODS: 1.10.1

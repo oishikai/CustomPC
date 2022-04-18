@@ -14,7 +14,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     
     @IBOutlet weak var searchTable: UITableView!
     
-    var titles: [String] = []
+    var PcPartsSeq: [PcParts] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,13 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titles.count
+        return PcPartsSeq.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
 //        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.setup(title: titles[indexPath.row])
+        cell.setup(parts: PcPartsSeq[indexPath.row])
         return cell
     }
 

@@ -22,11 +22,11 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        SearchParts.getPartsTitleFirst(parts: parts[indexPath.row]) { titles in
+        SearchParts.getPartsTitleFirst(selectedCategory: parts[indexPath.row]) { parts in
             DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
-                nextVC.titles = titles
+                nextVC.PcPartsSeq = parts
             self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
