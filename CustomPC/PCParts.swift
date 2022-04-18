@@ -15,7 +15,7 @@ enum category: String {
     case ssd = "SSD"
     case hdd = "ハードディスク・HDD"
     case pcCase = "PCケース"
-    case powerUnit = "電源ユニッ"
+    case powerUnit = "電源ユニット"
     case caseFan = "ケースファン"
     case monitor = "PCモニター・液晶ディスプレイ"
     case testParts = "テスト"
@@ -39,7 +39,7 @@ enum category: String {
         case .powerUnit:
             return "https://kakaku.com/search_results/%93d%8C%B9%83%86%83j%83b%83g/"
         case .caseFan:
-            return "https://kakaku.com/search_results/%93d%8C%B9%83%86%83j%83b%83g/"
+            return "https://kakaku.com/search_results/%83P%81%5B%83X%83t%83%40%83%93/"
         case .monitor:
             return "https://kakaku.com/search_results/%83%82%83j%83%5E%81%5B/"
         case .testParts:

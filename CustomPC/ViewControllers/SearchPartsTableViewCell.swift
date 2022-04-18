@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class SearchPartsTableViewCell: UITableViewCell {
 //    @IBOutlet private weak var repositoryImageView: UIImageView!
@@ -40,5 +41,7 @@ class SearchPartsTableViewCell: UITableViewCell {
         partsTitleLabel.text = parts.title
         partsMakerLabel.text = parts.maker
         partsPriceLabel.text = parts.price
+        
+        Nuke.loadImage(with: parts.image, into: partsImageView)
     }
 }
