@@ -11,53 +11,84 @@ import Alamofire
 import Kanna
 
 class SearchParts {
-    static func getPartsTitleFirst(parts: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
+    static func getPartsTitleFirst(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
-        AF.request(parts.startPageUrl()).responseString (encoding: String.Encoding.shiftJIS){ response in
+        AF.request(selectedCategory.startPageUrl()).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
-                    var partsSeq = [PcParts]()
-                    var images = [String]()
+                    var goods = [Goods]()
+                    // 画像のurl全取得
+                    var imageUrls = [URL]()
+                    for node in doc.css("img[data-src]") {
+                        if let strUrl = node["data-src"] {
+                            imageUrls.append(URL(string: strUrl)!)
+                        }
+                    }
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
                     // 選択されたカテゴリ以外を除く
                     for i in 1 ... (elements) {
-                        let category = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
-                        for ctg in doc.xpath(category) {
-                            if let text = ctg.text {
-                                if (text.contains(parts.rawValue)){ // ここでカテゴリを制限
-                                    // ここからメーカー、タイトル、値段取得
-                                    let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
-                                    let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
-                                    let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[2]/div/p[1]/span"
+                        let imgIterator = i - 1
+                        let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
+                        let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
+                        let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
+                        let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[2]/div/p[1]/span"
+                        
+                        var maker :String
+                        var title :String
+                        var price :String
+                        var category :String
+                        
+                        for ctg in doc.xpath(categoryXPath) {
+                            category = ctg.text ?? "fault"
+                            
+                            for mk in doc.xpath(makerXPath) {
+                                maker = mk.text ?? "fault"
+                                
+                                for ti in doc.xpath(titleXPath){
+                                    title = ti.text ?? "fault"
                                     
-                                    var maker :String
-                                    var title :String
-                                    var price :String
-                                    
-                                    for mk in doc.xpath(makerXPath) {
-                                        maker = mk.text ?? "fault"
+                                    for pr in doc.xpath(priceXPath) {
+                                        price = pr.text ?? "fault"
                                         
-                                        for ti in doc.xpath(titleXPath){
-                                            title = ti.text ?? "fault"
-                                            
-                                            for pr in doc.xpath(priceXPath) {
-                                                price = pr.text ?? "fault"
-                                                // PcPartsクラスインスタンス化
-                                                let pcparts = PcParts(category:parts, maker: maker, title: title, price: price)
-                                                partsSeq.append(pcparts)
-                                            }
-                                        }
+                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[imgIterator])
+                                        goods.append(gds)
                                     }
                                 }
                             }
                         }
                     }
-                    
-                    print(images)
+                    let partsSeq = exceptOtherCategory(category: selectedCategory, goods: goods)
                     completionHandler(partsSeq)
                 }
             }
         }
+    }
+    
+    static func exceptOtherCategory(category:category, goods:Array<Goods>) -> Array<PcParts> {
+        var partsSeq = [PcParts]()
+        for gds in goods {
+            if (gds.category.contains(category.rawValue)){
+                let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image)
+                partsSeq.append(pcparts)
+            }
+        }
+        return partsSeq
+    }
+}
+
+class Goods {
+    let title:String
+    let price:String
+    let maker:String
+    let category: String
+    let image:URL
+    
+    init(title:String, price:String, maker:String, category:String, image:URL) {
+        self.title = title
+        self.price = price
+        self.maker = maker
+        self.category = category
+        self.image = image
     }
 }
