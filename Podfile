@@ -8,6 +8,7 @@ target 'CustomPC' do
   # Pods for CustomPC
   pod 'Alamofire', '~> 5.2' 
   pod 'Kanna'
+  pod 'Nuke'
 
   target 'CustomPCTests' do
     inherit! :search_paths
