@@ -13,13 +13,13 @@ import Kanna
 class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var searchTable: UITableView!
-    @IBOutlet weak var searchBer: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar!
     var PcPartsSeq: [PcParts] = []
-    
+    var selectedCategory:category = category.testParts
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBer.delegate = self
+        searchBar.delegate = self
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         searchTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
@@ -47,5 +47,10 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 }
 
 extension SearchPartsViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard !(searchBar.text?.isEmpty ?? true) else { return }
+        searchBar.resignFirstResponder()
+        
+        
+    }
 }

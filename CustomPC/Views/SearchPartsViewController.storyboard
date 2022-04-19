@@ -74,7 +74,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="aNH-Tx-FQr"/>
                     <connections>
-                        <outlet property="searchBer" destination="F74-O3-qJX" id="ocb-bV-3zo"/>
+                        <outlet property="searchBar" destination="F74-O3-qJX" id="ocb-bV-3zo"/>
                         <outlet property="searchTable" destination="2pR-tw-biV" id="pGY-tX-n9d"/>
                     </connections>
                 </viewController>
