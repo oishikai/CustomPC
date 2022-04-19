@@ -11,7 +11,8 @@ import Alamofire
 import Kanna
 
 class SearchParts {
-    static func getPartsTitleFirst(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
+    // SearchPartsViewController遷移時(未検索時)の情報取得
+    static func searchPartsViewDidLoad(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
         AF.request(selectedCategory.startPageUrl()).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
@@ -26,9 +27,9 @@ class SearchParts {
                     }
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
-                    // 選択されたカテゴリ以外を除く
+                    // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
                     for i in 1 ... (elements) {
-                        let imgIterator = i - 1
+                        let imgIterator = i - 1 // 画像の配列imageUrlsの添字用の変数
                         let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
                         let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
                         let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
@@ -58,6 +59,7 @@ class SearchParts {
                             }
                         }
                     }
+                    // Goodsクラスのカテゴリと選択されたカテゴリを比較 整合する場合PcPartsクラスとしてインスタンス化
                     let partsSeq = exceptOtherCategory(category: selectedCategory, goods: goods)
                     completionHandler(partsSeq)
                 }
@@ -65,16 +67,23 @@ class SearchParts {
         }
     }
     
+    static func getPartsWithSearchBar(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
+        
+    }
+
+    // 選択されたカテゴリ(CPU,SSD等)と取得した商品のカテゴリ名の比較と照合する
     static func exceptOtherCategory(category:category, goods:Array<Goods>) -> Array<PcParts> {
         var partsSeq = [PcParts]()
         for gds in goods {
-            if (gds.category.contains(category.rawValue)){
+            if (gds.category.contains(category.rawValue)){ // 照合部分
                 let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image)
                 partsSeq.append(pcparts)
             }
         }
         return partsSeq
     }
+    
+    
 }
 
 class Goods {
