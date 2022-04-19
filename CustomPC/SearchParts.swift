@@ -12,9 +12,9 @@ import Kanna
 
 class SearchParts {
     // SearchPartsViewController遷移時(未検索時)の情報取得
-    static func searchPartsViewDidLoad(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
+    static func searchParts(selectedCategory: category, searchURL:String, completionHandler: @escaping (Array<PcParts>) -> Void) {
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
-        AF.request(selectedCategory.startPageUrl()).responseString (encoding: String.Encoding.shiftJIS){ response in
+        AF.request(searchURL).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
                     var goods = [Goods]()
@@ -67,10 +67,13 @@ class SearchParts {
         }
     }
     
-    static func getPartsWithSearchBar(selectedCategory: category,completionHandler: @escaping (Array<PcParts>) -> Void) {
-        
+    static func searchPartsWithSearchBar(selectedCategory: category, word: String, completionHandler: @escaping (Array<PcParts>) -> Void) {
+        let urlString = "https://kakaku.com/search_results/\(word)/".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        searchParts(selectedCategory: selectedCategory, searchURL: urlString) { parts in
+            completionHandler(parts)
+        }
     }
-
+    
     // 選択されたカテゴリ(CPU,SSD等)と取得した商品のカテゴリ名の比較と照合する
     static func exceptOtherCategory(category:category, goods:Array<Goods>) -> Array<PcParts> {
         var partsSeq = [PcParts]()
@@ -82,7 +85,6 @@ class SearchParts {
         }
         return partsSeq
     }
-    
     
 }
 
