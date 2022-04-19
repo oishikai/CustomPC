@@ -27,7 +27,8 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
-                nextVC.PcPartsSeq = parts
+                nextVC.pcPartsSeq = parts
+                nextVC.selectedCategory = selected
             self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

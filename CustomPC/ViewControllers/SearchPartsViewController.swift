@@ -14,7 +14,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     
     @IBOutlet weak var searchTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var PcPartsSeq: [PcParts] = []
+    var pcPartsSeq: [PcParts] = []
     var selectedCategory:category = category.testParts
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,13 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PcPartsSeq.count
+        return pcPartsSeq.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
 //        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.setup(parts: PcPartsSeq[indexPath.row])
+        cell.setup(parts: pcPartsSeq[indexPath.row])
         return cell
     }
 
@@ -50,7 +50,12 @@ extension SearchPartsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard !(searchBar.text?.isEmpty ?? true) else { return }
         searchBar.resignFirstResponder()
-        
-        
+        let word = searchBar.text!
+        SearchParts.searchPartsWithSearchBar(selectedCategory: selectedCategory, word: word) { parts in
+            self.pcPartsSeq = parts
+            DispatchQueue.main.async {
+                self.searchTable.reloadData()
+            }
+        }
     }
 }
