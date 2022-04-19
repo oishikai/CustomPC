@@ -13,27 +13,27 @@ import Kanna
 class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var searchTable: UITableView!
-    
-    var PcPartsSeq: [PcParts] = []
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var pcPartsSeq: [PcParts] = []
+    var selectedCategory:category = category.testParts
     override func viewDidLoad() {
         super.viewDidLoad()
-//        titles = SearchParts.getPartsTitleFirst()
+        
+        searchBar.delegate = self
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         searchTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
-        
         searchTable.rowHeight = UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PcPartsSeq.count
+        return pcPartsSeq.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
 //        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.setup(parts: PcPartsSeq[indexPath.row])
+        cell.setup(parts: pcPartsSeq[indexPath.row])
         return cell
     }
 
@@ -43,5 +43,19 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 //            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
 //            self.navigationController?.pushViewController(nextVC, animated: true)
 //        }
+    }
+}
+
+extension SearchPartsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard !(searchBar.text?.isEmpty ?? true) else { return }
+        searchBar.resignFirstResponder()
+        let word = searchBar.text!
+        SearchParts.searchPartsWithSearchBar(selectedCategory: selectedCategory, word: word) { parts in
+            self.pcPartsSeq = parts
+            DispatchQueue.main.async {
+                self.searchTable.reloadData()
+            }
+        }
     }
 }
