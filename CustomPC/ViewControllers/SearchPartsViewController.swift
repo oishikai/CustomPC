@@ -13,16 +13,16 @@ import Kanna
 class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var searchTable: UITableView!
-    
+    @IBOutlet weak var searchBer: UISearchBar!
     var PcPartsSeq: [PcParts] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        titles = SearchParts.getPartsTitleFirst()
+        
+        searchBer.delegate = self
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         searchTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
-        
         searchTable.rowHeight = UITableView.automaticDimension
     }
     
@@ -44,4 +44,8 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 //            self.navigationController?.pushViewController(nextVC, animated: true)
 //        }
     }
+}
+
+extension SearchPartsViewController: UISearchBarDelegate {
+    
 }

@@ -43,6 +43,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="7Ph-VB-fKN" id="F3z-n2-ORY"/>
+                                    </connections>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="Gb5-79-Ka0" userLabel="searchCell">
@@ -71,12 +74,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="aNH-Tx-FQr"/>
                     <connections>
+                        <outlet property="searchBer" destination="F74-O3-qJX" id="ocb-bV-3zo"/>
                         <outlet property="searchTable" destination="2pR-tw-biV" id="pGY-tX-n9d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tv-LN-R6w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-640.57971014492762" y="94.419642857142847"/>
+            <point key="canvasLocation" x="-312" y="94"/>
         </scene>
     </scenes>
     <resources>
