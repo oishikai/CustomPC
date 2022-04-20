@@ -55,12 +55,15 @@ class PcParts {
     let title: String
     let price: String
     let image: URL
-    init(category: category, maker: String, title:String, price:String, image:URL) {
+    let detailUrl: String
+    
+    init(category: category, maker: String, title:String, price:String, image:URL, detail:String) {
         self.category = category
         self.maker = maker
         self.title = title
         self.price = price
         self.image = image
+        self.detailUrl = detail
     }
     
 }

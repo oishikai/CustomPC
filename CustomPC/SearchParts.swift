@@ -25,11 +25,22 @@ class SearchParts {
                             imageUrls.append(URL(string: strUrl)!)
                         }
                     }
+                    
+                    var detailUrls = [String]()
+                    for node in doc.css("a[href]") {
+                        if let strUrl = node["href"] {
+                            let standerd = "https://kakaku.com/item/"
+                            if (strUrl.contains(standerd) && !detailUrls.contains(strUrl)){
+                                detailUrls.append(strUrl)
+                            }
+                        }
+                    }
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
                     for i in 1 ... (elements) {
-                        let imgIterator = i - 1 // 画像の配列imageUrlsの添字用の変数
+                        
+                        let arraysIterator = i - 1 // 画像と詳細URLの配列imageUrlsの添字用の変数
                         let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
                         let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
                         let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
@@ -52,7 +63,7 @@ class SearchParts {
                                     for pr in doc.xpath(priceXPath) {
                                         price = pr.text ?? "fault"
                                         
-                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[imgIterator])
+                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[arraysIterator], detail: detailUrls[arraysIterator])
                                         goods.append(gds)
                                     }
                                 }
@@ -66,7 +77,6 @@ class SearchParts {
             }
         }
     }
-    
     static func searchPartsWithSearchBar(selectedCategory: category, word: String, completionHandler: @escaping (Array<PcParts>) -> Void) {
         let urlString = "https://kakaku.com/search_results/\(word)/".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         searchParts(selectedCategory: selectedCategory, searchURL: urlString) { parts in
@@ -79,7 +89,7 @@ class SearchParts {
         var partsSeq = [PcParts]()
         for gds in goods {
             if (gds.category.contains(category.rawValue)){ // 照合部分
-                let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image)
+                let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image, detail: gds.detail)
                 partsSeq.append(pcparts)
             }
         }
@@ -94,12 +104,14 @@ class Goods {
     let maker:String
     let category: String
     let image:URL
+    let detail:String
     
-    init(title:String, price:String, maker:String, category:String, image:URL) {
+    init(title:String, price:String, maker:String, category:String, image:URL, detail:String) {
         self.title = title
         self.price = price
         self.maker = maker
         self.category = category
         self.image = image
+        self.detail = detail
     }
 }
