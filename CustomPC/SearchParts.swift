@@ -18,6 +18,7 @@ class SearchParts {
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
                     var goods = [Goods]()
+                    var goodsPath = 4 // 画像付き広告がない場合の商品のdivタグの位置
                     // 画像のurl全取得
                     var imageUrls = [URL]()
                     for node in doc.css("img[data-src]") {
@@ -36,8 +37,11 @@ class SearchParts {
                             }
                         }
                     }
+                    
                     if (detectAd(doc: doc)) {
-                        
+                        imageUrls.removeSubrange(0 ... 9)
+                        detailUrls.removeSubrange(0 ... 9)
+                        goodsPath = 5
                     }
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
@@ -45,11 +49,10 @@ class SearchParts {
                     for i in 1 ... (elements) {
                         
                         let arraysIterator = i - 1 // 画像と詳細URLの配列imageUrlsの添字用の変数
-                        let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
-                        let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
-                        let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
-                        //*[@id=\"default\"]/div[2]/div[2]/div/div[5]/div/div[1]/div/div[1]/div[1]/div/p[2]
-                        let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[2]/div/p[1]/span"
+                        let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
+                        let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
+                        let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
+                        let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[2]/div/p[1]/span"
                         
                         var maker :String
                         var title :String

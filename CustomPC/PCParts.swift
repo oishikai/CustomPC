@@ -18,7 +18,7 @@ enum category: String {
     case powerUnit = "電源ユニット"
     case caseFan = "ケースファン"
     case monitor = "PCモニター・液晶ディスプレイ"
-    case testParts = "テスト"
+    case testParts = "ぬいぐるみ"
     
     func startPageUrl() -> String{
         switch self {
