@@ -34,5 +34,3 @@ extension String {
         return self.addingPercentEncoding(withAllowedCharacters: .rfc3986Unreserved,  using: .windows31j)
     }
 }
-
-let escaped = "今時SJISのシステムなんて…".sjisPercentEncoded

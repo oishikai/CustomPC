@@ -36,7 +36,9 @@ class SearchParts {
                             }
                         }
                     }
-                    detectAd(doc: doc)
+                    if (detectAd(doc: doc)) {
+                        
+                    }
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
@@ -46,7 +48,7 @@ class SearchParts {
                         let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
                         let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
                         let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
-                                          //*[@id=\"default\"]/div[2]/div[2]/div/div[5]/div/div[1]/div/div[1]/div[1]/div/p[2]
+                        //*[@id=\"default\"]/div[2]/div[2]/div/div[5]/div/div[1]/div/div[1]/div[1]/div/p[2]
                         let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div[\(i)]/div/div[2]/div/p[1]/span"
                         
                         var maker :String
@@ -100,10 +102,17 @@ class SearchParts {
         return partsSeq
     }
     
-    static func detectAd(doc:HTMLDocument) -> Void {
-        //*[@id="default"]/div[2]/div[2]/div/div[3]/div/div[1]/div
-        let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[3]/div/div[1]/div").count
-        let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[3]/div/div[1]/div"
+    static func detectAd(doc:HTMLDocument) -> Bool {
+        var ads = [String]()
+        for link in doc.xpath("//div[@class='p-sponsorShop2']") {
+            ads.append(link.text ?? "")
+        }
+        
+        if (ads.count == 1){
+            return true
+        }else{
+            return false
+        }
     }
 }
 
