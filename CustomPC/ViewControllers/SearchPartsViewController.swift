@@ -38,11 +38,12 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        DispatchQueue.main.async {
-//            let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
-//            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
+            nextVC.pcparts = self.pcPartsSeq[indexPath.row]
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 
