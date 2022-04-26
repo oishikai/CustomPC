@@ -37,9 +37,28 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1J-BO-2GR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hyd-rD-EiI">
+                                                <rect key="frame" x="8" y="8" width="398" height="389"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="398" id="VRz-mF-BHW"/>
+                                                    <constraint firstAttribute="height" constant="389" id="fVE-fE-N1M"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-EL-SbF">
+                                                <rect key="frame" x="8" y="452" width="398" height="115"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" systemColor="systemGreenColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1200" id="0ug-vh-uk1"/>
+                                            <constraint firstItem="hyd-rD-EiI" firstAttribute="top" secondItem="I1J-BO-2GR" secondAttribute="top" constant="8" id="8SH-Ju-KnZ"/>
+                                            <constraint firstItem="hyd-rD-EiI" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" constant="8" id="9su-Dp-xgH"/>
+                                            <constraint firstAttribute="trailing" secondItem="hyd-rD-EiI" secondAttribute="trailing" constant="8" id="vcd-WN-rWA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -72,6 +91,8 @@
                     <navigationItem key="navigationItem" id="00x-gF-mQo"/>
                     <connections>
                         <outlet property="contentsView" destination="I1J-BO-2GR" id="qxa-Zi-U0n"/>
+                        <outlet property="makerLabel" destination="R9L-EL-SbF" id="AVZ-5K-4HS"/>
+                        <outlet property="partsImageView" destination="hyd-rD-EiI" id="Dx8-Tv-rwI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weo-1e-r4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -82,6 +103,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
