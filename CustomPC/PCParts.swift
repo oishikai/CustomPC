@@ -66,4 +66,15 @@ class PcParts {
         self.detailUrl = detail
     }
     
+    var zoomImage = [URL]()
+    var specs = [Spec]()
+}
+
+class Spec {
+    let item:String
+    let contents:String
+    init(item: String, contents:String) {
+        self.item = item
+        self.contents = contents
+    }
 }
