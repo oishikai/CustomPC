@@ -15,6 +15,7 @@ class PartsDetailViewController: UIViewController{
         //R:220 G:220 B:220
         if let parts = pcparts {
             Nuke.loadImage(with: parts.image, into: partsImageView)
+            ParseDetails.getEnlargedImages(detailUrl: parts.detailUrl)
         }
         
         makerLabel.text = pcparts?.detailUrl

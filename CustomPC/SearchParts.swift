@@ -79,12 +79,14 @@ class SearchParts {
                         }
                     }
                     // Goodsクラスのカテゴリと選択されたカテゴリを比較 整合する場合PcPartsクラスとしてインスタンス化
-                    let partsSeq = exceptOtherCategory(category: selectedCategory, goods: goods)
+                    var partsSeq = exceptOtherCategory(category: selectedCategory, goods: goods)
+                    partsSeq = exceptOutsideDetailPage(parts: partsSeq)
                     completionHandler(partsSeq)
                 }
             }
         }
     }
+    
     static func searchPartsWithSearchBar(selectedCategory: category, word: String, completionHandler: @escaping (Array<PcParts>) -> Void) {
         let engoded = word.sjisPercentEncoded
         let urlString = "https://kakaku.com/search_results/\(engoded)/"
@@ -116,6 +118,17 @@ class SearchParts {
         }else{
             return false
         }
+    }
+    
+    static func exceptOutsideDetailPage(parts: Array<PcParts>)-> Array<PcParts>{
+        var partsSeq = [PcParts]()
+        
+        for pts in parts {
+            if (pts.detailUrl.contains("https://kakaku.com/item/")){
+                partsSeq.append(pts)
+            }
+        }
+        return partsSeq
     }
 }
 
