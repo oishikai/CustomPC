@@ -13,23 +13,22 @@ import Kanna
 
 class ParseDetails {
     
-    static func getEnlargedImages(detailUrl: String) -> Void{
+    static func getFullscaleImages(detailUrl: String, completionHandler: @escaping (URL) -> Void) -> Void{
         let imageViewUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
-        
         AF.request(imageViewUrl).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
-                    var imageUrls = [URL]()
-                    for node in doc.css("img[data-src]") {
-                        if let strUrl = node["data-src"]{
+                    for node in doc.css("img[src]") {
+                        if let strUrl = node["src"]{
                             if (strUrl.contains("https://img1.kakaku.k-img.com/images/productimage/fullscale/")){
-                                imageUrls.append(URL(string: strUrl)!)
+                                completionHandler(URL(string: strUrl)!)
+                                return
                             }
                         }
                     }
                 }
             }
         }
-        
     }
+    
 }
