@@ -45,11 +45,14 @@
                                                     <constraint firstAttribute="height" constant="389" id="fVE-fE-N1M"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-EL-SbF">
-                                                <rect key="frame" x="8" y="452" width="398" height="115"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="maker" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9L-EL-SbF">
+                                                <rect key="frame" x="0.0" y="413" width="414" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="5Qh-8l-a9M"/>
+                                                    <constraint firstAttribute="width" constant="414" id="SVz-Ic-UFM"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" systemColor="systemGreenColor"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -58,6 +61,9 @@
                                             <constraint firstAttribute="height" constant="1200" id="0ug-vh-uk1"/>
                                             <constraint firstItem="hyd-rD-EiI" firstAttribute="top" secondItem="I1J-BO-2GR" secondAttribute="top" constant="8" id="8SH-Ju-KnZ"/>
                                             <constraint firstItem="hyd-rD-EiI" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" constant="8" id="9su-Dp-xgH"/>
+                                            <constraint firstItem="R9L-EL-SbF" firstAttribute="top" secondItem="hyd-rD-EiI" secondAttribute="bottom" constant="16" id="PFC-Mp-xHn"/>
+                                            <constraint firstItem="R9L-EL-SbF" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="bdM-qD-Cag"/>
+                                            <constraint firstAttribute="trailing" secondItem="R9L-EL-SbF" secondAttribute="trailing" id="huv-j5-vL9"/>
                                             <constraint firstAttribute="trailing" secondItem="hyd-rD-EiI" secondAttribute="trailing" constant="8" id="vcd-WN-rWA"/>
                                         </constraints>
                                     </view>
@@ -103,9 +109,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
