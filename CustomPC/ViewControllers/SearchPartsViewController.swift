@@ -44,6 +44,16 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
             nextVC.pcparts = self.pcPartsSeq[indexPath.row]
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
+        
+//        ParseDetails.getAllFullscaleImages(detailUrl: self.pcPartsSeq[indexPath.row].detailUrl) { url in
+//            DispatchQueue.main.async {
+//                let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
+//                let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
+//                nextVC.pcparts = self.pcPartsSeq[indexPath.row]
+//                nextVC.fullScaleImage = url
+//                self.navigationController?.pushViewController(nextVC, animated: true)
+//            }
+//        }
     }
 }
 
