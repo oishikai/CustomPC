@@ -30,4 +30,19 @@ class ParseDetails {
             }
         }
     }
+    
+    static func getSpec() -> Void{
+        AF.request("https://kakaku.com/item/K0001359217/spec/").responseString (encoding: String.Encoding.shiftJIS){ response in
+            if let html = response.value {
+                if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
+                    let elements = doc.xpath("//*[@id=\"mainLeft\"]/table/tbody/tr").count
+                    
+                    print(elements)
+                    return
+                }else{
+                    print("")
+                }
+            }
+        }
+    }
 }

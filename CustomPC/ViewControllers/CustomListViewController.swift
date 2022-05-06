@@ -18,6 +18,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped(_:)))
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
         
+        ParseDetails.getSpec()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
