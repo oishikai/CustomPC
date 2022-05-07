@@ -19,7 +19,8 @@ class PartsDetailViewController: UIViewController{
             
             var urls = [URL]()
             
-            getFullscaleImages(url: "https://kakaku.com/item/K0001374433/images/", urls: urls) { urls in
+            let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
+            getFullscaleImages(detailUrl: imageUrl, urls: urls) { urls in
                 print(urls.count)
             }
             
@@ -27,17 +28,24 @@ class PartsDetailViewController: UIViewController{
         }
     }
     
-    private func getFullscaleImages(url :String, urls: [URL], completionHandler: @escaping ([URL]) -> Void) -> Void{
-        ParseDetails.getFullscaleImages(detailUrl: url) { url in
-            guard let url = url else{
+    private func getFullscaleImages(detailUrl :String, urls: [URL], completionHandler: @escaping ([URL]) -> Void) -> Void{
+        ParseDetails.getFullscaleImages(detailUrl: detailUrl) { imageUrl in
+            guard let url = imageUrl else{
                 completionHandler(urls)
                 return
             }
             
             var urlss = urls
             urlss.append(url)
-            let next = "https://kakaku.com/item/K0001374433/images/page=ka_\(urlss.count)/"
-            self.getFullscaleImages(url: next, urls: urlss, completionHandler: completionHandler)
+            
+            var nextUrl: String
+            if detailUrl.contains("page=ka_") { // -> true
+                nextUrl = detailUrl.replacingOccurrences(of: "page=ka_\(urlss.count - 1)/", with: "page=ka_\(urlss.count)/")
+            }else{
+                nextUrl = detailUrl + "page=ka_\(urlss.count)/"
+            }
+//            var nextUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
+            self.getFullscaleImages(detailUrl: nextUrl, urls: urlss, completionHandler: completionHandler)
         }
     }
 }
