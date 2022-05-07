@@ -16,12 +16,28 @@ class PartsDetailViewController: UIViewController{
         makerLabel.backgroundColor = UIColor.white
         //R:220 G:220 B:220
         if let parts = pcparts {
-
-            ParseDetails.getFullscaleImages(detailUrl: parts.detailUrl) { url in
-                Nuke.loadImage(with: url, into: self.partsImageView)
+            
+            var urls = [URL]()
+            
+            getFullscaleImages(url: "https://kakaku.com/item/K0001374433/images/", urls: urls) { urls in
+                print(urls.count)
             }
             
             makerLabel.text = "    " + parts.maker
+        }
+    }
+    
+    private func getFullscaleImages(url :String, urls: [URL], completionHandler: @escaping ([URL]) -> Void) -> Void{
+        ParseDetails.getFullscaleImages(detailUrl: url) { url in
+            guard let url = url else{
+                completionHandler(urls)
+                return
+            }
+            
+            var urlss = urls
+            urlss.append(url)
+            let next = "https://kakaku.com/item/K0001374433/images/page=ka_\(urlss.count)/"
+            self.getFullscaleImages(url: next, urls: urlss, completionHandler: completionHandler)
         }
     }
 }

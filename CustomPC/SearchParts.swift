@@ -44,7 +44,7 @@ class SearchParts {
                         goodsPath = 5
                     }
                     // ページのパーツ数取得
-                    let elements: Int = doc.xpath("//*[@id=\"default\"]/div[2]/div[2]/div/div[4]/div/div").count
+                    let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
                     for i in 1 ... (elements) {
                         
