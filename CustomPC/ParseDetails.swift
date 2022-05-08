@@ -13,7 +13,7 @@ import Kanna
 
 class ParseDetails {
     
-    static func getFullscaleImages(detailUrl: String, completionHandler: @escaping (URL?) -> Void) -> Void{
+    private static func getFullscaleImages(detailUrl: String, completionHandler: @escaping (URL?) -> Void) -> Void{
         let imageViewUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
         AF.request(imageViewUrl).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
@@ -30,6 +30,27 @@ class ParseDetails {
                     return
                 }
             }
+        }
+    }
+    
+    static func getFullscaleImages(detailUrl :String, urls: [URL], completionHandler: @escaping ([URL]) -> Void) -> Void{
+        ParseDetails.getFullscaleImages(detailUrl: detailUrl) { imageUrl in
+            guard let url = imageUrl else{
+                completionHandler(urls)
+                return
+            }
+            
+            var urlss = urls
+            urlss.append(url)
+            
+            var nextUrl: String
+            if detailUrl.contains("page=ka_") { // -> true
+                nextUrl = detailUrl.replacingOccurrences(of: "page=ka_\(urlss.count - 1)/", with: "page=ka_\(urlss.count)/")
+            }else{
+                nextUrl = detailUrl + "page=ka_\(urlss.count)/"
+            }
+//            var nextUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
+            self.getFullscaleImages(detailUrl: nextUrl, urls: urlss, completionHandler: completionHandler)
         }
     }
     
