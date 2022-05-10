@@ -39,42 +39,38 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1J-BO-2GR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                                         <subviews>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BEW-9L-Oxx">
-                                                <rect key="frame" x="8" y="0.0" width="398" height="398"/>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BEW-9L-Oxx">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="398" id="gSx-zK-F9G"/>
-                                                    <constraint firstAttribute="width" constant="398" id="vpP-9X-Rvr"/>
+                                                    <constraint firstAttribute="width" secondItem="BEW-9L-Oxx" secondAttribute="height" multiplier="1:1" id="czV-T4-eF7"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="a1q-rh-DgW">
-                                                    <size key="itemSize" width="402" height="405"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="a1q-rh-DgW">
+                                                    <size key="itemSize" width="414" height="414"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier=" PartsImageCollectionViewCell" reuseIdentifier="PartsImageCollectionViewCell" id="aBT-XO-9Gv" customClass="PartsImageCollectionViewCell" customModule="CustomPC" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-3.5" width="402" height="405"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Cca-ro-g4X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="402" height="405"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kZR-kc-rP7">
-                                                                    <rect key="frame" x="8" y="8" width="398" height="397"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="398" id="Nx2-Jc-pVd"/>
-                                                                        <constraint firstAttribute="width" constant="398" id="gyh-Hr-OES"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="kZR-kc-rP7" firstAttribute="leading" secondItem="Cca-ro-g4X" secondAttribute="leading" id="90u-Ng-EQE"/>
                                                                 <constraint firstItem="kZR-kc-rP7" firstAttribute="top" secondItem="Cca-ro-g4X" secondAttribute="top" id="TDM-fY-zyJ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="kZR-kc-rP7" secondAttribute="bottom" id="pVl-b1-4BL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="kZR-kc-rP7" secondAttribute="trailing" id="vkC-Hy-c5E"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
-                                                        <size key="customSize" width="402" height="405"/>
+                                                        <size key="customSize" width="414" height="414"/>
                                                         <connections>
                                                             <outlet property="partsImage" destination="kZR-kc-rP7" id="cNh-eu-pNs"/>
                                                         </connections>
@@ -93,8 +89,8 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1200" id="0ug-vh-uk1"/>
-                                            <constraint firstItem="BEW-9L-Oxx" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" constant="8" id="9xF-Tp-x0j"/>
-                                            <constraint firstAttribute="trailing" secondItem="BEW-9L-Oxx" secondAttribute="trailing" constant="8" id="Q9c-pf-ODq"/>
+                                            <constraint firstItem="BEW-9L-Oxx" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="9xF-Tp-x0j"/>
+                                            <constraint firstAttribute="trailing" secondItem="BEW-9L-Oxx" secondAttribute="trailing" id="Q9c-pf-ODq"/>
                                             <constraint firstItem="BEW-9L-Oxx" firstAttribute="top" secondItem="I1J-BO-2GR" secondAttribute="top" id="ihF-yn-pBI"/>
                                         </constraints>
                                     </view>
