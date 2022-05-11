@@ -16,7 +16,9 @@ class PartsDetailViewController: UIViewController{
         collectionView.delegate = self
         collectionView.dataSource = self
         contentsView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
-        pageControl.backgroundColor = UIColor.gray
+        pageControl.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+        pageControl.pageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.green
         if let parts = pcparts {
             let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
             

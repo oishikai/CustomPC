@@ -11,6 +11,7 @@ enum category: String {
     case cpu = "CPU"
     case cpuCooler = "CPUクーラー"
     case memory = "メモリー"
+    case motherBoard = "マザーボード"
     case graphicsCard = "グラフィックボード・ビデオカード"
     case ssd = "SSD"
     case hdd = "ハードディスク・HDD"
@@ -28,6 +29,8 @@ enum category: String {
             return "https://kakaku.com/search_results/cpu%83N%81%5B%83%89%81%5B/"
         case .memory:
             return "https://kakaku.com/search_results/ddr4%83%81%83%82%83%8A/"
+        case .motherBoard:
+            return "https://kakaku.com/search_results/%83%7D%83U%81%5B%83%7B%81%5B%83h/"
         case .graphicsCard:
             return "https://kakaku.com/search_results/%83O%83%89%83b%83t%83B%83b%83N%83%7B%81%5B%83h/"
         case .ssd:

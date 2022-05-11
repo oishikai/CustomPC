@@ -81,9 +81,11 @@
                                                     <outlet property="delegate" destination="CMc-9K-cZ8" id="SAH-xS-Dw2"/>
                                                 </connections>
                                             </collectionView>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="THd-tC-SJJ">
-                                                <rect key="frame" x="91" y="406" width="233" height="28"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="THd-tC-SJJ">
+                                                <rect key="frame" x="107" y="414" width="200" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="2CU-gx-VTC"/>
+                                                </constraints>
                                             </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -91,7 +93,9 @@
                                             <constraint firstAttribute="height" constant="1200" id="0ug-vh-uk1"/>
                                             <constraint firstItem="BEW-9L-Oxx" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="9xF-Tp-x0j"/>
                                             <constraint firstAttribute="trailing" secondItem="BEW-9L-Oxx" secondAttribute="trailing" id="Q9c-pf-ODq"/>
+                                            <constraint firstItem="THd-tC-SJJ" firstAttribute="centerX" secondItem="I1J-BO-2GR" secondAttribute="centerX" id="b0C-MI-L4p"/>
                                             <constraint firstItem="BEW-9L-Oxx" firstAttribute="top" secondItem="I1J-BO-2GR" secondAttribute="top" id="ihF-yn-pBI"/>
+                                            <constraint firstItem="THd-tC-SJJ" firstAttribute="top" secondItem="BEW-9L-Oxx" secondAttribute="bottom" id="l89-6U-M4r"/>
                                         </constraints>
                                     </view>
                                 </subviews>
