@@ -32,7 +32,7 @@ enum category: String {
         case .motherBoard:
             return "https://kakaku.com/search_results/%83%7D%83U%81%5B%83%7B%81%5B%83h/"
         case .graphicsCard:
-            return "https://kakaku.com/search_results/%83O%83%89%83b%83t%83B%83b%83N%83%7B%81%5B%83h/"
+            return "https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/"
         case .ssd:
             return "https://kakaku.com/search_results/SSD/"
         case .hdd:

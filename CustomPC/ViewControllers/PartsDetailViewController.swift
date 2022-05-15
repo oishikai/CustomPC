@@ -6,7 +6,10 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var contentsView: UIView!
-        
+    @IBOutlet weak var makerLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    
     var pcparts: PcParts?
     private var urls = [URL]()
     var currentIndex = 0
@@ -19,18 +22,22 @@ class PartsDetailViewController: UIViewController{
         pageControl.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
         pageControl.pageIndicatorTintColor = UIColor.gray
         pageControl.currentPageIndicatorTintColor = UIColor.green
+        makerLabel.backgroundColor = UIColor.white
+        titleLabel.backgroundColor = UIColor.white
+        priceLabel.backgroundColor = UIColor.white
+        
         if let parts = pcparts {
+            self.makerLabel.text = "   " + parts.maker
+            self.titleLabel.text = parts.title
+            self.priceLabel.text = parts.price
             let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
             
             ParseDetails.getFullscaleImages(detailUrl: imageUrl, urls: urls) { urls in
-                print(urls.count)
                 self.urls = urls
-                print("viewFrame=",self.collectionView.frame.size.width)
                 DispatchQueue.main.async {
                     self.pageControl.numberOfPages = urls.count
                     self.pageControl.reloadInputViews()
                     self.collectionView.reloadData()
-                    print("viewFrame=",self.collectionView.frame.size.width)
                 }
             }
         }

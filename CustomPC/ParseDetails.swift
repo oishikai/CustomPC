@@ -69,12 +69,19 @@ class ParseDetails {
                         let u = unko.text ?? "un"
                         a.append(u)
                     }
-                    print(elements)
                     
-                    print(a)
+                    var spec = a[0]
+                    spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: ",")
+                    spec = spec.replacingOccurrences(of: "\r\n", with: ",")
+                    var specs = spec.split(separator: ",")
+                    var except: [String.SubSequence] = []
+                    for spec in specs{
+                        if (!spec.contains("　")){
+                            except.append(spec)
+                        }
+                    }
+                    print(except)
                     return
-                }else{
-                    print("")
                 }
             }
         }
