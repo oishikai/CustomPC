@@ -49,19 +49,20 @@ class ParseDetails {
             }else{
                 nextUrl = detailUrl + "page=ka_\(urlss.count)/"
             }
-//            var nextUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
+            //            var nextUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
             self.getFullscaleImages(detailUrl: nextUrl, urls: urlss, completionHandler: completionHandler)
         }
     }
     
-    static func getSpec() -> Void{
-        AF.request("https://kakaku.com/item/K0001374433/spec/?lid=spec_anchorlink_details#tab").responseString (encoding: String.Encoding.shiftJIS){ response in
+    static func getSpec(category : category) -> Void{
+        AF.request("https://kakaku.com/item/K0001319993/spec/#tab").responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
-                    let elements = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
+                    for unko in doc.xpath("//*[@id=\"mainLeft\"]/div[1]") {
+                        let u = unko.text ?? "un"
+                        print(u)
+                    }
                     
-                    
-                    // //*[@id="mainLeft"]/table/tbody/tr[2]/th[1]
                     var a = [String]()
                     let makerXPath = "//*[@id='mainLeft']/table"
                     
@@ -69,18 +70,19 @@ class ParseDetails {
                         let u = unko.text ?? "un"
                         a.append(u)
                     }
-                    
+                    var u = doc.xpath(makerXPath).first?.text
                     var spec = a[0]
-                    spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: ",")
-                    spec = spec.replacingOccurrences(of: "\r\n", with: ",")
-                    var specs = spec.split(separator: ",")
+                    spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: "?").replacingOccurrences(of: "\r\n", with: "?")
+                    var specs = spec.split(separator: "?")
                     var except: [String.SubSequence] = []
                     for spec in specs{
-                        if (!spec.contains("　")){
+                        if (!spec.contains("　") && !spec.contains("  ")){
                             except.append(spec)
                         }
                     }
                     print(except)
+                    
+                    
                     return
                 }
             }
