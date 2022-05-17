@@ -76,4 +76,28 @@ class ParseDetails {
             }
         }
     }
+    
+    static func getPrices() -> Void{
+//        let specUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "/#tab")
+        AF.request("https://kakaku.com/item/K0001028334/#tab").responseString (encoding: String.Encoding.shiftJIS){ response in
+            if let html = response.value {
+                if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
+                    let makerXPath = "//*[@id='mainLeft']/table"
+                    var except: [String] = []
+                    if var spec = doc.xpath(makerXPath).first?.text {
+                        spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: "?").replacingOccurrences(of: "\r\n", with: "?")
+                        let specs = spec.split(separator: "?")
+//                        for spec in specs{
+//                            if (!spec.contains("　") && !spec.contains("  ")){
+//                                let str:String = String(spec)
+//                                except.append(str)
+//                            }
+//                        }
+                        print(spec)
+                        print(specs)
+                    }
+                }
+            }
+        }
+    }
 }

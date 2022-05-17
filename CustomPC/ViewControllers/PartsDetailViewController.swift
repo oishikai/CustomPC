@@ -54,10 +54,9 @@ class PartsDetailViewController: UIViewController{
         }
         
         let layout = UICollectionViewFlowLayout()
-          layout.scrollDirection = .horizontal
-//          layout.minimumInteritemSpacing = 0.0
-          layout.minimumLineSpacing = 0.0
-          collectionView.collectionViewLayout = layout
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0.0
+        collectionView.collectionViewLayout = layout
     }
     
     func getImageByUrl(imageUrl: URL) -> UIImage{
@@ -92,7 +91,7 @@ extension PartsDetailViewController : UICollectionViewDelegate, UICollectionView
         currentIndex = Int(scrollView.contentOffset.x / collectionView.frame.size.width)
         pageControl.currentPage = currentIndex
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
@@ -106,25 +105,25 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         let specItems = self.pcparts?.category.specItems()
-
+        
         if let specItems = specItems {
             
-//            for specItem in specItems{
-//                for data in self.specData{
-//
-//                    if (data == specItem){
-//                        cell.textLabel?.text = data
-//                        cell.backgroundColor = UIColor.lightGray
-//                        return cell
-//                    }
-//
-//                    if (data.contains(specItem)){
-//                        var exceptItemData = data.replacingOccurrences(of: specItem, with: "")
-//                        cell.textLabel?.text = specItem + " : " + exceptItemData
-//                        return cell
-//                    }
-//                }
-//            }
+            //            for specItem in specItems{
+            //                for data in self.specData{
+            //
+            //                    if (data == specItem){
+            //                        cell.textLabel?.text = data
+            //                        cell.backgroundColor = UIColor.lightGray
+            //                        return cell
+            //                    }
+            //
+            //                    if (data.contains(specItem)){
+            //                        var exceptItemData = data.replacingOccurrences(of: specItem, with: "")
+            //                        cell.textLabel?.text = specItem + " : " + exceptItemData
+            //                        return cell
+            //                    }
+            //                }
+            //            }
             let data = self.specData[indexPath.row]
             for specItem in specItems {
                 if (specItem == data){
