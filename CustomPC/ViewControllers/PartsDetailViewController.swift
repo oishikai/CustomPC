@@ -27,7 +27,8 @@ class PartsDetailViewController: UIViewController{
         makerLabel.backgroundColor = UIColor.white
         titleLabel.backgroundColor = UIColor.white
         priceLabel.backgroundColor = UIColor.white
-        specTableView.layer.borderColor = CGColor.
+        specTableView.layer.borderColor = UIColor.darkGray.cgColor
+        specTableView.layer.borderWidth = 1.0
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
@@ -45,6 +46,7 @@ class PartsDetailViewController: UIViewController{
             
             ParseDetails.getSpec(detailUrl: parts.detailUrl) { specs in
                 self.specData = specs
+                print(specs)
                 DispatchQueue.main.async {
                     self.specTableView.reloadData()
                 }
@@ -103,7 +105,42 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.specData[indexPath.row]
+        let specItems = self.pcparts?.category.specItems()
+
+        if let specItems = specItems {
+            
+//            for specItem in specItems{
+//                for data in self.specData{
+//
+//                    if (data == specItem){
+//                        cell.textLabel?.text = data
+//                        cell.backgroundColor = UIColor.lightGray
+//                        return cell
+//                    }
+//
+//                    if (data.contains(specItem)){
+//                        var exceptItemData = data.replacingOccurrences(of: specItem, with: "")
+//                        cell.textLabel?.text = specItem + " : " + exceptItemData
+//                        return cell
+//                    }
+//                }
+//            }
+            let data = self.specData[indexPath.row]
+            for specItem in specItems {
+                if (specItem == data){
+                    cell.textLabel?.text = data
+                    cell.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+                    return cell
+                }
+                
+                if (data.contains(specItem)){
+                    var splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
+                    cell.textLabel?.text = splitItemData
+                    cell.textLabel?.numberOfLines = 0
+                    return cell
+                }
+            }
+        }
         return cell
     }
     

@@ -82,7 +82,7 @@ enum category: String {
 
 class PcParts {
     
-    private let category: category
+    let category: category
     let maker: String
     let title: String
     let price: String
