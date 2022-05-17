@@ -54,36 +54,24 @@ class ParseDetails {
         }
     }
     
-    static func getSpec(category : category) -> Void{
-        AF.request("https://kakaku.com/item/K0001319993/spec/#tab").responseString (encoding: String.Encoding.shiftJIS){ response in
+    static func getSpec(detailUrl : String, completionHandler: @escaping ([String]) -> Void) -> Void{
+        let specUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "spec/#tab")
+        AF.request(specUrl).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
-                    for unko in doc.xpath("//*[@id=\"mainLeft\"]/div[1]") {
-                        let u = unko.text ?? "un"
-                        print(u)
-                    }
-                    
-                    var a = [String]()
                     let makerXPath = "//*[@id='mainLeft']/table"
-                    
-                    for unko in doc.xpath(makerXPath) {
-                        let u = unko.text ?? "un"
-                        a.append(u)
-                    }
-                    var u = doc.xpath(makerXPath).first?.text
-                    var spec = a[0]
-                    spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: "?").replacingOccurrences(of: "\r\n", with: "?")
-                    var specs = spec.split(separator: "?")
-                    var except: [String.SubSequence] = []
-                    for spec in specs{
-                        if (!spec.contains("　") && !spec.contains("  ")){
-                            except.append(spec)
+                    var except: [String] = []
+                    if var spec = doc.xpath(makerXPath).first?.text {
+                        spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: "?").replacingOccurrences(of: "\r\n", with: "?")
+                        let specs = spec.split(separator: "?")
+                        for spec in specs{
+                            if (!spec.contains("　") && !spec.contains("  ")){
+                                let str:String = String(spec)
+                                except.append(str)
+                            }
                         }
+                        completionHandler(except)
                     }
-                    print(except)
-                    
-                    
-                    return
                 }
             }
         }

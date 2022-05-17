@@ -9,10 +9,12 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var makerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var specTableView: UITableView!
     
     var pcparts: PcParts?
     private var urls = [URL]()
-    var currentIndex = 0
+    private var currentIndex = 0
+    private var specData = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class PartsDetailViewController: UIViewController{
         makerLabel.backgroundColor = UIColor.white
         titleLabel.backgroundColor = UIColor.white
         priceLabel.backgroundColor = UIColor.white
-        
+        specTableView.layer.borderColor = CGColor.
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
@@ -38,6 +40,13 @@ class PartsDetailViewController: UIViewController{
                     self.pageControl.numberOfPages = urls.count
                     self.pageControl.reloadInputViews()
                     self.collectionView.reloadData()
+                }
+            }
+            
+            ParseDetails.getSpec(detailUrl: parts.detailUrl) { specs in
+                self.specData = specs
+                DispatchQueue.main.async {
+                    self.specTableView.reloadData()
                 }
             }
         }
@@ -85,5 +94,19 @@ extension PartsDetailViewController : UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+}
+
+extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return specData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = self.specData[indexPath.row]
+        return cell
+    }
+    
+    
 }
 
