@@ -107,23 +107,6 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
         let specItems = self.pcparts?.category.specItems()
         
         if let specItems = specItems {
-            
-            //            for specItem in specItems{
-            //                for data in self.specData{
-            //
-            //                    if (data == specItem){
-            //                        cell.textLabel?.text = data
-            //                        cell.backgroundColor = UIColor.lightGray
-            //                        return cell
-            //                    }
-            //
-            //                    if (data.contains(specItem)){
-            //                        var exceptItemData = data.replacingOccurrences(of: specItem, with: "")
-            //                        cell.textLabel?.text = specItem + " : " + exceptItemData
-            //                        return cell
-            //                    }
-            //                }
-            //            }
             let data = self.specData[indexPath.row]
             for specItem in specItems {
                 if (specItem == data){

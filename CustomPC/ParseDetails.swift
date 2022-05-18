@@ -79,22 +79,30 @@ class ParseDetails {
     
     static func getPrices() -> Void{
 //        let specUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "/#tab")
-        AF.request("https://kakaku.com/item/K0001028334/#tab").responseString (encoding: String.Encoding.shiftJIS){ response in
+        AF.request("https://kakaku.com/item/K0001385125/?lid=pc_ksearch_kakakuitem").responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
                     let makerXPath = "//*[@id='mainLeft']/table"
                     var except: [String] = []
-                    if var spec = doc.xpath(makerXPath).first?.text {
+                    if  var spec = doc.xpath(makerXPath).first?.text {
                         spec = spec.replacingOccurrences(of: "\r\n\r\n\r\n", with: "?").replacingOccurrences(of: "\r\n", with: "?")
                         let specs = spec.split(separator: "?")
-//                        for spec in specs{
-//                            if (!spec.contains("　") && !spec.contains("  ")){
-//                                let str:String = String(spec)
-//                                except.append(str)
-//                            }
-//                        }
-                        print(spec)
                         print(specs)
+                        var RankAndPrice :[String] = []
+                        for (offset, spec) in specs.enumerated(){
+                            if (spec.contains("位") && spec != "順位"){
+                                RankAndPrice.append(String(specs[offset]))
+                                RankAndPrice.append(String(specs[offset + 1]))
+                                
+                                var i = offset + 3
+                                while(!specs[i].contains(")")){
+                                    i += 1
+                                }
+                                RankAndPrice.append(String(specs[i - 1]))
+                            }
+                        }
+                        print(RankAndPrice)
+                        print(RankAndPrice.count)
                     }
                 }
             }

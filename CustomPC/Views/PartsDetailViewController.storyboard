@@ -145,6 +145,15 @@
                                                     <outlet property="delegate" destination="CMc-9K-cZ8" id="ATU-PG-gbr"/>
                                                 </connections>
                                             </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- 価格情報 --" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSx-1Y-Xaf">
+                                                <rect key="frame" x="0.0" y="929" width="414" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="OvH-uc-Z9f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -154,6 +163,7 @@
                                             <constraint firstAttribute="trailing" secondItem="OnX-Wo-KBq" secondAttribute="trailing" id="2aH-Nh-lQr"/>
                                             <constraint firstItem="OnX-Wo-KBq" firstAttribute="top" secondItem="Sbh-Rq-tqz" secondAttribute="bottom" id="3L6-zW-K3O"/>
                                             <constraint firstAttribute="trailing" secondItem="BEz-2I-vJv" secondAttribute="trailing" constant="8" id="3v9-Sh-sTm"/>
+                                            <constraint firstItem="oSx-1Y-Xaf" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="7OJ-VK-Mzj"/>
                                             <constraint firstItem="KeN-et-ckQ" firstAttribute="top" secondItem="OnX-Wo-KBq" secondAttribute="bottom" constant="16" id="7jO-Ok-1Au"/>
                                             <constraint firstAttribute="trailing" secondItem="YHY-k9-Z8c" secondAttribute="trailing" id="9ef-dD-abX"/>
                                             <constraint firstItem="BEW-9L-Oxx" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="9xF-Tp-x0j"/>
@@ -163,7 +173,9 @@
                                             <constraint firstAttribute="trailing" secondItem="KeN-et-ckQ" secondAttribute="trailing" id="M83-bp-dAl"/>
                                             <constraint firstAttribute="trailing" secondItem="BEW-9L-Oxx" secondAttribute="trailing" id="Q9c-pf-ODq"/>
                                             <constraint firstItem="BEz-2I-vJv" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" constant="8" id="SBu-X0-awt"/>
+                                            <constraint firstAttribute="trailing" secondItem="oSx-1Y-Xaf" secondAttribute="trailing" id="TXW-h4-uCo"/>
                                             <constraint firstItem="Sbh-Rq-tqz" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="XTl-t3-7Mx"/>
+                                            <constraint firstItem="oSx-1Y-Xaf" firstAttribute="top" secondItem="BEz-2I-vJv" secondAttribute="bottom" constant="16" id="aIK-0K-Hs3"/>
                                             <constraint firstItem="OnX-Wo-KBq" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="awz-c1-1hw"/>
                                             <constraint firstItem="THd-tC-SJJ" firstAttribute="centerX" secondItem="I1J-BO-2GR" secondAttribute="centerX" id="b0C-MI-L4p"/>
                                             <constraint firstItem="YHY-k9-Z8c" firstAttribute="leading" secondItem="I1J-BO-2GR" secondAttribute="leading" id="cdB-hY-kn9"/>
