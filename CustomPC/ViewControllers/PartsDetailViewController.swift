@@ -10,6 +10,7 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var specTableView: UITableView!
+    @IBOutlet weak var priceTableView: UITableView!
     
     var pcparts: PcParts?
     private var urls = [URL]()
@@ -29,6 +30,8 @@ class PartsDetailViewController: UIViewController{
         priceLabel.backgroundColor = UIColor.white
         specTableView.layer.borderColor = UIColor.darkGray.cgColor
         specTableView.layer.borderWidth = 1.0
+        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
+        priceTableView.layer.borderWidth = 1.0
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
