@@ -77,8 +77,7 @@ class ParseDetails {
         }
     }
     
-    static func getPrices() -> Void{
-//        let specUrl = detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "/#tab")
+    static func getPrices(detailUrl : String, completionHandler: @escaping ([String]) -> Void) -> Void{
         AF.request("https://kakaku.com/item/K0001385125/?lid=pc_ksearch_kakakuitem").responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
@@ -101,8 +100,7 @@ class ParseDetails {
                                 RankAndPrice.append(String(specs[i - 1]))
                             }
                         }
-                        print(RankAndPrice)
-                        print(RankAndPrice.count)
+                        completionHandler(RankAndPrice)
                     }
                 }
             }
