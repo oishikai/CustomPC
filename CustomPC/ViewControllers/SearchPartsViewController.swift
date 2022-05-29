@@ -16,6 +16,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBOutlet weak var searchBar: UISearchBar!
     var pcPartsSeq: [PcParts] = []
     var selectedCategory:category = category.testParts
+    var selectedParts:[PcParts] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +43,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
             let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
             nextVC.pcparts = self.pcPartsSeq[indexPath.row]
+            nextVC.selectedParts = self.selectedParts
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
         

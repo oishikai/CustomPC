@@ -217,8 +217,11 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="3q9-3m-fVB"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uia-Wl-PWS">
-                                <rect key="frame" x="184" y="816" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="130.5" y="816" width="153" height="30"/>
+                                <state key="normal" title="このパーツを選択する"/>
+                                <connections>
+                                    <action selector="selectButton:" destination="CMc-9K-cZ8" eventType="touchUpInside" id="jJC-eQ-9xR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c85-k3-Py8"/>
@@ -240,6 +243,7 @@
                         <outlet property="pageControl" destination="THd-tC-SJJ" id="4aV-Rd-d1Q"/>
                         <outlet property="priceLabel" destination="OnX-Wo-KBq" id="eLc-7g-aO1"/>
                         <outlet property="priceTableView" destination="w7o-2c-E0t" id="dc7-f4-oB4"/>
+                        <outlet property="selectButton" destination="Uia-Wl-PWS" id="Qn4-gm-akw"/>
                         <outlet property="specTableView" destination="BEz-2I-vJv" id="QPD-89-of5"/>
                         <outlet property="titleLabel" destination="Sbh-Rq-tqz" id="XKg-ay-TJc"/>
                     </connections>

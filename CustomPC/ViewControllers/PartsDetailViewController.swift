@@ -11,7 +11,9 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var specTableView: UITableView!
     @IBOutlet weak var priceTableView: UITableView!
+    @IBOutlet weak var selectButton: UIButton!
     
+    var selectedParts:[PcParts] = []
     var pcparts: PcParts?
     private var urls = [URL]()
     private var currentIndex = 0
@@ -70,14 +72,15 @@ class PartsDetailViewController: UIViewController{
         collectionView.collectionViewLayout = layout
     }
     
-    func getImageByUrl(imageUrl: URL) -> UIImage{
-        do {
-            let data = try Data(contentsOf: imageUrl)
-            return UIImage(data: data)!
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
+    @IBAction func selectButton(_ sender: Any) {
+        guard let pcparts = self.pcparts else { return }
+        selectedParts.append(pcparts)
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
+            nextVC.selectedParts = self.selectedParts
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        return UIImage()
     }
 }
 
