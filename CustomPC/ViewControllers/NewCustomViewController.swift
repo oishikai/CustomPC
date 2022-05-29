@@ -16,6 +16,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        var totalPrice = 0
+        
+        for parts in self.selectedParts{
+            totalPrice += parts.getPriceInt()
+        }
+        print(totalPrice)
         DispatchQueue.main.async {
             self.selectTable.reloadData()
         }

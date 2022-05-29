@@ -98,6 +98,13 @@ class PcParts {
         self.detailUrl = detail
     }
     
+    func getPriceInt() -> Int{
+        let exceptMark = self.price.replacingOccurrences(of: "¥", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: " ～", with: "")
+        if let intPrice = Int(exceptMark){
+            return intPrice
+        }
+        return 0
+    }
     var zoomImage = [URL]()
     var specs = [Spec]()
 }

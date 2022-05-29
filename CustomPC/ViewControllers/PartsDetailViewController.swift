@@ -39,7 +39,7 @@ class PartsDetailViewController: UIViewController{
             self.titleLabel.text = parts.title
             self.priceLabel.text = parts.price
             let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
-            
+            print(parts.price)
             ParseDetails.getFullscaleImages(detailUrl: imageUrl, urls: urls) { urls in
                 self.urls = urls
                 DispatchQueue.main.async {
@@ -74,7 +74,18 @@ class PartsDetailViewController: UIViewController{
     
     @IBAction func selectButton(_ sender: Any) {
         guard let pcparts = self.pcparts else { return }
-        selectedParts.append(pcparts)
+        var isSelected = false
+        for (index, p) in selectedParts.enumerated() {
+            if (p.category == pcparts.category){
+                isSelected = true
+                selectedParts[index] = pcparts
+            }
+        }
+        
+        if (!isSelected){
+            selectedParts.append(pcparts)
+        }
+        
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
