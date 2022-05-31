@@ -50,6 +50,10 @@ enum category: String {
         }
     }
     
+    func getValue() -> String {
+        return self.rawValue
+    }
+    
     func specItems() -> [String] {
         switch self {
         case .cpu:

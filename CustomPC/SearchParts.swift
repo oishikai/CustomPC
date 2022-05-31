@@ -43,6 +43,8 @@ class SearchParts {
                         detailUrls.removeSubrange(0 ... 9)
                         goodsPath = 5
                     }
+                    
+                    var adaptItr = 0
                     // ページのパーツ数取得
                     let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
@@ -71,7 +73,12 @@ class SearchParts {
                                     for pr in doc.xpath(priceXPath) {
                                         price = pr.text ?? "fault"
                                         
-                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[arraysIterator], detail: detailUrls[arraysIterator])
+                                        if (title.contains("[PR企画]")){
+                                            adaptItr += 1
+                                            continue
+                                        }
+                                        
+                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[arraysIterator - adaptItr], detail: detailUrls[arraysIterator - adaptItr])
                                         goods.append(gds)
                                     }
                                 }
@@ -88,8 +95,10 @@ class SearchParts {
     }
     
     static func searchPartsWithSearchBar(selectedCategory: category, word: String, completionHandler: @escaping (Array<PcParts>) -> Void) {
-        let engoded = word.sjisPercentEncoded
-        let urlString = "https://kakaku.com/search_results/\(engoded)/"
+        let addCategoryPhrase = selectedCategory.rawValue + " " + word
+        let encoded = addCategoryPhrase.sjisPercentEncoded
+        let urlString = "https://kakaku.com/search_results/\(encoded)/"
+        print(urlString)
         searchParts(selectedCategory: selectedCategory, searchURL: urlString) { parts in
             completionHandler(parts)
         }
@@ -99,7 +108,10 @@ class SearchParts {
     static func exceptOtherCategory(category:category, goods:Array<Goods>) -> Array<PcParts> {
         var partsSeq = [PcParts]()
         for gds in goods {
-            if (gds.category.contains(category.rawValue)){ // 照合部分
+            if (gds.category.contains("ハードディスク") && gds.category.contains(category.rawValue)){ // 照合部分
+                let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image, detail: gds.detail)
+                partsSeq.append(pcparts)
+            }else if (gds.category == category.rawValue) {
                 let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image, detail: gds.detail)
                 partsSeq.append(pcparts)
             }
