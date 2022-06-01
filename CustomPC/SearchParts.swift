@@ -23,17 +23,27 @@ class SearchParts {
                     var imageUrls = [URL]()
                     for node in doc.css("img[data-src]") {
                         if let strUrl = node["data-src"] {
-                            imageUrls.append(URL(string: strUrl)!)
+                            if (strUrl != "https://img1.kakaku.k-img.com/images/category/article_catalog.gif"){
+                                imageUrls.append(URL(string: strUrl)!)
+                            }
                         }
                     }
                     
                     var detailUrls = [String]()
+                    var prdnews = [Int]()
+                    var adaptItr = 0
+                    var newsUrl = ""
+                    
                     for node in doc.css("a[href]") {
                         if let strUrl = node["href"] {
                             let standerd = "https://kakaku.com/item/"
                             let redirect = "https://kakaku.com/ksearch/redirect/"
                             if ( (strUrl.contains(standerd) || strUrl.contains(redirect)) && !detailUrls.contains(strUrl)){
                                 detailUrls.append(strUrl)
+                            }else if (strUrl.contains("https://news.kakaku.com/prdnews/") && newsUrl != strUrl){
+                                newsUrl = strUrl
+                                prdnews.append(detailUrls.count + 1 + adaptItr)
+                                adaptItr += 1
                             }
                         }
                     }
@@ -44,17 +54,22 @@ class SearchParts {
                         goodsPath = 5
                     }
                     
-                    var adaptItr = 0
+                    var containPrdNewsCells = false
+                    
+                    var diff = 0
                     // ページのパーツ数取得
-                    let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
+                    var elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
+                    
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
                     for i in 1 ... (elements) {
-                        
+                        print(diff)
                         let arraysIterator = i - 1 // 画像と詳細URLの配列imageUrlsの添字用の変数
                         let categoryXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/div[1]/p[1]"
                         let makerXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/p[1]"
                         let titleXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[1]/div[1]/div/p[2]"
                         let priceXPath = "//*[@id=\"default\"]/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div/div[2]/div/p[1]/span"
+                        
+                        let othersPath = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[\(goodsPath)]/div/div[\(i)]/div").count
                         
                         var maker :String
                         var title :String
@@ -73,13 +88,20 @@ class SearchParts {
                                     for pr in doc.xpath(priceXPath) {
                                         price = pr.text ?? "fault"
                                         
-                                        if (title.contains("[PR企画]")){
-                                            adaptItr += 1
-                                            continue
+                                        var adaptDiff = 0
+                                        print(arraysIterator)
+                                        if (containPrdNewsCells) {
+                                            for it in prdnews {
+                                                if (arraysIterator != diff){
+                                                    adaptDiff = arraysIterator - diff
+                                                }
+                                            }
                                         }
-                                        
-                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[arraysIterator - adaptItr], detail: detailUrls[arraysIterator - adaptItr])
+                                        print(adaptDiff)
+                                        let gds = Goods(title: title, price: price, maker: maker, category: category, image: imageUrls[diff],
+                                                        detail: detailUrls[diff])
                                         goods.append(gds)
+                                        diff += 1
                                     }
                                 }
                             }
