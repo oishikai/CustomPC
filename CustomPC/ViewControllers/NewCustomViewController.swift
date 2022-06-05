@@ -22,6 +22,8 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             totalPrice += parts.getPriceInt()
         }
         print(totalPrice)
+        let yen = "¥" + String.localizedStringWithFormat("%d", totalPrice)
+        print(yen)
         DispatchQueue.main.async {
             self.selectTable.reloadData()
         }
