@@ -69,6 +69,11 @@ class PartsDetailViewController: UIViewController{
 //                    self.priceTableView.reloadData()
 //                }
 //            }
+            
+            if (parts.price == "価格情報無し"){
+                self.selectButton.isEnabled = false
+                self.selectButton.setTitle("価格情報が無いため選択できません", for: .normal)
+            }
         }
         
         let layout = UICollectionViewFlowLayout()
