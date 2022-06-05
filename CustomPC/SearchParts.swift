@@ -13,6 +13,7 @@ import Kanna
 class SearchParts {
     // SearchPartsViewController遷移時(未検索時)の情報取得
     static func searchParts(selectedCategory: category, searchURL:String, completionHandler: @escaping (Array<PcParts>) -> Void) {
+        print(searchURL)
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
         AF.request(searchURL).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
@@ -36,7 +37,7 @@ class SearchParts {
                             let redirect = "https://kakaku.com/ksearch/redirect/"
                             if ( (strUrl.contains(standerd) || strUrl.contains(redirect)) && !detailUrls.contains(strUrl)){
                                 detailUrls.append(strUrl)
-                            }else if (strUrl.contains("https://news.kakaku.com/prdnews/") && newsUrl != strUrl){
+                            }else if ((strUrl.contains("https://news.kakaku.com/prdnews/") || strUrl.contains("https://kakaku.com/article/") ) && newsUrl != strUrl && detailUrls.count != 0){
                                 detailUrls.append("")
                                 newsUrl = strUrl
                             }
