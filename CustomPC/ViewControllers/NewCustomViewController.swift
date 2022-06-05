@@ -21,13 +21,25 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         for parts in self.selectedParts{
             totalPrice += parts.getPriceInt()
         }
-        print(totalPrice)
+        
         let yen = "¥" + String.localizedStringWithFormat("%d", totalPrice)
-        print(yen)
         DispatchQueue.main.async {
             self.selectTable.reloadData()
         }
+        
+        // CPUとマザーボードが選択されているか判定
+        var count = 0
+        for parts in selectedParts {
+            if (parts.category.rawValue == "CPU" || parts.category.rawValue == "マザーボード") {
+                count += 1
+            }
+        }
+        
+        if (count == 2){
+            print("check")
+        }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return parts.count
     }

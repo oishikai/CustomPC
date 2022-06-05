@@ -60,6 +60,30 @@ class PartsDetailViewController: UIViewController{
                 DispatchQueue.main.async {
                     self.specTableView.reloadData()
                 }
+                
+                if parts.category.rawValue == "CPU"{
+                    for spec in specs {
+                        if (spec.contains("世代第")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("ソケット形状")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
+                
+                if parts.category.rawValue == "マザーボード" {
+                    for spec in specs {
+                        if (spec.contains("チップセット")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("CPUソケット")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
             }
             
 //            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
