@@ -33,7 +33,6 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
-//        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.setup(parts: pcPartsSeq[indexPath.row])
         return cell
     }
@@ -46,16 +45,6 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
             nextVC.selectedParts = self.selectedParts
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        
-//        ParseDetails.getAllFullscaleImages(detailUrl: self.pcPartsSeq[indexPath.row].detailUrl) { url in
-//            DispatchQueue.main.async {
-//                let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
-//                let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
-//                nextVC.pcparts = self.pcPartsSeq[indexPath.row]
-//                nextVC.fullScaleImage = url
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            }
-//        }
     }
 }
 

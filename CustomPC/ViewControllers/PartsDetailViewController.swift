@@ -10,7 +10,7 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var specTableView: UITableView!
-    @IBOutlet weak var priceTableView: UITableView!
+    //@IBOutlet weak var priceTableView: UITableView!
     @IBOutlet weak var selectButton: UIButton!
     
     var selectedParts:[PcParts] = []
@@ -19,6 +19,8 @@ class PartsDetailViewController: UIViewController{
     private var currentIndex = 0
     private var specData = [String]()
     private var priceData = [String]()
+    var searchButtonItem: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -32,8 +34,11 @@ class PartsDetailViewController: UIViewController{
         priceLabel.backgroundColor = UIColor.white
         specTableView.layer.borderColor = UIColor.darkGray.cgColor
         specTableView.layer.borderWidth = 1.0
-        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
-        priceTableView.layer.borderWidth = 1.0
+//        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
+//        priceTableView.layer.borderWidth = 1.0
+        searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
+        self.navigationItem.rightBarButtonItem = searchButtonItem
+        
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
@@ -57,13 +62,13 @@ class PartsDetailViewController: UIViewController{
                 }
             }
             
-            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
-                self.priceData = prices
-                print(prices)
-                DispatchQueue.main.async {
-                    self.priceTableView.reloadData()
-                }
-            }
+//            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
+//                self.priceData = prices
+//                print(prices)
+//                DispatchQueue.main.async {
+//                    self.priceTableView.reloadData()
+//                }
+//            }
         }
         
         let layout = UICollectionViewFlowLayout()
@@ -90,6 +95,15 @@ class PartsDetailViewController: UIViewController{
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
+    
+    @IBAction func didTapSearch(_ sender: Any) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "PartsWebViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "PartsWebViewController")as! PartsWebViewController
+            nextVC.targetUrl = self.pcparts!.detailUrl
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
@@ -124,42 +138,32 @@ extension PartsDetailViewController : UICollectionViewDelegate, UICollectionView
 
 extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView.tag == 0){
-            return specData.count
-        }else{
-            return priceData.count
-        }
+        return specData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let a = UITableViewCell(style: .default, reuseIdentifier: "specCell")
-        if tableView.tag == 0 {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "specCell")
-            let specItems = self.pcparts?.category.specItems()
-            
-            if let specItems = specItems {
-                let data = self.specData[indexPath.row]
-                for specItem in specItems {
-                    if (specItem == data){
-                        cell.textLabel?.text = data
-                        cell.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
-                        return cell
-                    }
-                    
-                    if (data.contains(specItem)){
-                        var splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
-                        cell.textLabel?.text = splitItemData
-                        cell.textLabel?.numberOfLines = 0
-                        return cell
-                    }
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "specCell")
+        let specItems = self.pcparts?.category.specItems()
+        
+        if let specItems = specItems {
+            let data = self.specData[indexPath.row]
+            for specItem in specItems {
+                if (specItem == data){
+                    cell.textLabel?.text = data
+                    cell.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+                    return cell
+                }
+                
+                if (data.contains(specItem)){
+                    var splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
+                    cell.textLabel?.text = splitItemData
+                    cell.textLabel?.numberOfLines = 0
+                    return cell
                 }
             }
-        }else if tableView.tag == 1 {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "priceCell")
-            cell.textLabel?.text = self.priceData[indexPath.row * 3] + " : " + self.priceData[indexPath.row * 3 + 1] + " : " + self.priceData[indexPath.row * 3 + 2]
-            return cell
         }
-        return a
+        
+        return cell
     }
     
     
