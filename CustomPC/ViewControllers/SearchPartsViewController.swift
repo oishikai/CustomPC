@@ -16,6 +16,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBOutlet weak var searchBar: UISearchBar!
     var pcPartsSeq: [PcParts] = []
     var selectedCategory:category = category.testParts
+    var selectedParts:[PcParts] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,17 +33,18 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
-//        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.setup(parts: pcPartsSeq[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        DispatchQueue.main.async {
-//            let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
-//            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
+            nextVC.pcparts = self.pcPartsSeq[indexPath.row]
+            nextVC.selectedParts = self.selectedParts
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 

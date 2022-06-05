@@ -2,23 +2,56 @@ import UIKit
 
 class NewCustomViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
+    var selectedParts:[PcParts] = []
     @IBOutlet weak var selectTable: UITableView!
     
-    private let parts = [category.cpu, category.cpuCooler, category.memory, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor, category.testParts]
+    private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor, category.testParts]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
+        selectTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
+        selectTable.rowHeight = UITableView.automaticDimension
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        var totalPrice = 0
+        
+        for parts in self.selectedParts{
+            totalPrice += parts.getPriceInt()
+        }
+        print(totalPrice)
+        DispatchQueue.main.async {
+            self.selectTable.reloadData()
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return parts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "partsCell", for: indexPath)
-        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-        cell.textLabel?.text = parts[indexPath.row].rawValue
-        return cell
+        let partsCategory = parts[indexPath.row].rawValue
+        var isSelected = false
+        var selectedParts:PcParts?
+        
+        for parts in self.selectedParts {
+            if parts.category.rawValue == partsCategory {
+                isSelected = true
+                selectedParts = parts
+            }
+        }
+        
+        if isSelected {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
+            cell.setup(parts: selectedParts!)
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "partsCell", for: indexPath)
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            cell.textLabel?.text = parts[indexPath.row].rawValue
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -29,6 +62,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
                 nextVC.pcPartsSeq = parts
                 nextVC.selectedCategory = selected
+                nextVC.selectedParts = self.selectedParts
             self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
