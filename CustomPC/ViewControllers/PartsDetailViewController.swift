@@ -184,7 +184,7 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
                 }
                 
                 if (data.contains(specItem)){
-                    var splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
+                    let splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
                     cell.textLabel?.text = splitItemData
                     cell.textLabel?.numberOfLines = 0
                     return cell
