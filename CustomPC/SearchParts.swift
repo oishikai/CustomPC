@@ -13,7 +13,6 @@ import Kanna
 class SearchParts {
     // SearchPartsViewController遷移時(未検索時)の情報取得
     static func searchParts(selectedCategory: category, searchURL:String, completionHandler: @escaping (Array<PcParts>) -> Void) {
-        print(searchURL)
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
         AF.request(searchURL).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
@@ -29,28 +28,32 @@ class SearchParts {
                     }
                     
                     var detailUrls = [String]()
-                    var newsUrl = ""
+                    var newsUrl = "" // ループ内で、一つ前の広告やタイアップの記事のURLを格納する
                     
+                    // detailUrls に商品のURLを格納し、広告やタイアップ記事の場合は空文字を格納する
                     for node in doc.css("a[href]") {
                         if let strUrl = node["href"] {
                             let standerd = "https://kakaku.com/item/"
                             let redirect = "https://kakaku.com/ksearch/redirect/"
                             if ( (strUrl.contains(standerd) || strUrl.contains(redirect)) && !detailUrls.contains(strUrl)){
+                                // 商品のセルの場合
                                 detailUrls.append(strUrl)
                             }else if ((strUrl.contains("https://news.kakaku.com/prdnews/") || strUrl.contains("https://kakaku.com/article/") ) && newsUrl != strUrl && detailUrls.count != 0){
+                                // 広告やタイアップ記事の場合
                                 detailUrls.append("")
                                 newsUrl = strUrl
                             }
                         }
                     }
                     
+                    // 外部ページの横スクロール広告がある場合
                     if (detectAd(doc: doc)) {
                         imageUrls.removeSubrange(0 ... 9)
                         detailUrls.removeSubrange(0 ... 9)
                         goodsPath = 5
                     }
-
-                    // ページのパーツ数取得
+                    
+                    // ページのセル数取得
                     let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
                     
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
@@ -96,11 +99,13 @@ class SearchParts {
         }
     }
     
+    // 検索バーの処理
     static func searchPartsWithSearchBar(selectedCategory: category, word: String, completionHandler: @escaping (Array<PcParts>) -> Void) {
+        // 検索ワードを "カテゴリ名+入力値" とする
         let addCategoryPhrase = selectedCategory.rawValue + " " + word
         let encoded = addCategoryPhrase.sjisPercentEncoded
         let urlString = "https://kakaku.com/search_results/\(encoded)/"
-        print(urlString)
+        // 検索ワードをSJISにエンコードしたURLで情報取得
         searchParts(selectedCategory: selectedCategory, searchURL: urlString) { parts in
             completionHandler(parts)
         }
@@ -110,7 +115,11 @@ class SearchParts {
     static func exceptOtherCategory(category:category, goods:Array<Goods>) -> Array<PcParts> {
         var partsSeq = [PcParts]()
         for gds in goods {
-            if (gds.category.contains("ハードディスク") && gds.category.contains(category.rawValue)){ // 照合部分
+            /*
+             選択されたカテゴリと一致するカテゴリの商品のみPcPartsクラスとしてインスタンス化する
+             ハードディスクは3.5インチと2.5インチのものがある為、曖昧に判定してインスタンス化する
+             */
+            if (gds.category.contains("ハードディスク") && gds.category.contains(category.rawValue)){
                 let pcparts = PcParts(category: category, maker: gds.maker, title: gds.title, price: gds.price, image: gds.image, detail: gds.detail)
                 partsSeq.append(pcparts)
             }else if (gds.category == category.rawValue) {
@@ -120,6 +129,11 @@ class SearchParts {
         }
         return partsSeq
     }
+    
+    /*
+     価格コムの検索結果ページは外部商品の横スクロール広告が含まれる場合がある
+     含まれる場合XPathが異なるので判定する
+     */
     
     static func detectAd(doc:HTMLDocument) -> Bool {
         var ads = [String]()
@@ -134,6 +148,10 @@ class SearchParts {
         }
     }
     
+    /*
+    パーツの詳細画面を表示する為、外部のショッピングサイトを参照するパーツは除き、
+    価格コム独自の詳細ページを持つパーツのみ残す
+     */
     static func exceptOutsideDetailPage(parts: Array<PcParts>)-> Array<PcParts>{
         var partsSeq = [PcParts]()
         
@@ -146,6 +164,7 @@ class SearchParts {
     }
 }
 
+// 取得した商品のDTO カテゴリでの絞り込みに利用する
 class Goods {
     let title:String
     let price:String
