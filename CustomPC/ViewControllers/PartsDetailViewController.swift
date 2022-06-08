@@ -84,6 +84,18 @@ class PartsDetailViewController: UIViewController{
                         }
                     }
                 }
+                
+                if parts.category.rawValue == "CPUクーラー" {
+                    for spec in specs {
+                        if (spec.contains("Intel対応ソケット")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("AMD対応ソケット")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
             }
             
 //            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
