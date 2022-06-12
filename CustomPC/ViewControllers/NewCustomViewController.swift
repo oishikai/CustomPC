@@ -4,12 +4,14 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     var selectedParts:[PcParts] = []
     @IBOutlet weak var selectTable: UITableView!
+    @IBOutlet weak var priceLabel: UILabel!
     
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor, category.testParts]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        selectTable.layer.borderColor = UIColor.darkGray.cgColor
+        selectTable.layer.borderWidth = 0.5
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         selectTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         selectTable.rowHeight = UITableView.automaticDimension
@@ -24,6 +26,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         
         let yen = "¥" + String.localizedStringWithFormat("%d", totalPrice)
         DispatchQueue.main.async {
+            self.priceLabel.text = yen
             self.selectTable.reloadData()
         }
         
