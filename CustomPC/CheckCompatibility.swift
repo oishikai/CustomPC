@@ -9,6 +9,50 @@ import Foundation
 
 class CheckCompatibility {
     
+    static func isSelectedCpuMotherBoard(selected: [PcParts]) -> Bool{
+        var cpu:PcParts?
+        var motherboard:PcParts?
+        
+        for parts in selected {
+            if parts.category.rawValue == "CPU" {
+                cpu = parts
+            }
+            
+            if parts.category.rawValue == "マザーボード" {
+                motherboard = parts
+            }
+        }
+        
+        if let cpu = cpu, let motherboard = motherboard {
+            if (compatibilityCpuMotherboard(cpu: cpu, motherboard: motherboard)) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    static func isSelectedCpuCoolerMotherBoard(selected: [PcParts]) -> Bool{
+        var cpuCooler:PcParts?
+        var motherboard:PcParts?
+        
+        for parts in selected {
+            if parts.category.rawValue == "CPUクーラー" {
+                cpuCooler = parts
+            }
+            
+            if parts.category.rawValue == "マザーボード" {
+                motherboard = parts
+            }
+        }
+        
+        if let cpuCooler = cpuCooler, let motherboard = motherboard {
+            if (compatibilityCpucoolerMotherboard(cpuCooler: cpuCooler, motherBoard: motherboard)) {
+                return true
+            }
+        }
+        return false
+    }
+
     static func compatibilityCpuMotherboard(cpu: PcParts, motherboard:PcParts) -> Bool {
         let cpuMaker = cpu.maker
         let chipset = motherboard.specs[0]

@@ -98,14 +98,6 @@ class PartsDetailViewController: UIViewController{
                 }
             }
             
-//            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
-//                self.priceData = prices
-//                print(prices)
-//                DispatchQueue.main.async {
-//                    self.priceTableView.reloadData()
-//                }
-//            }
-            
             if (parts.price == "価格情報無し"){
                 self.selectButton.isEnabled = false
                 self.selectButton.setTitle("価格情報が無いため選択できません", for: .normal)
