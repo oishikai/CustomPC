@@ -60,15 +60,43 @@ class PartsDetailViewController: UIViewController{
                 DispatchQueue.main.async {
                     self.specTableView.reloadData()
                 }
+                
+                if parts.category.rawValue == "CPU"{
+                    for spec in specs {
+                        if (spec.contains("世代第")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("ソケット形状")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
+                
+                if parts.category.rawValue == "マザーボード" {
+                    for spec in specs {
+                        if (spec.contains("チップセット")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("CPUソケット")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
+                
+                if parts.category.rawValue == "CPUクーラー" {
+                    for spec in specs {
+                        if (spec.contains("Intel対応ソケット")){
+                            parts.specs.append(spec)
+                        }
+                        
+                        if (spec.contains("AMD対応ソケット")){
+                            parts.specs.append(spec)
+                        }
+                    }
+                }
             }
-            
-//            ParseDetails.getPrices(detailUrl: parts.detailUrl) { prices in
-//                self.priceData = prices
-//                print(prices)
-//                DispatchQueue.main.async {
-//                    self.priceTableView.reloadData()
-//                }
-//            }
             
             if (parts.price == "価格情報無し"){
                 self.selectButton.isEnabled = false
@@ -160,7 +188,7 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
                 }
                 
                 if (data.contains(specItem)){
-                    var splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
+                    let splitItemData = data.replacingOccurrences(of: specItem, with: specItem + " : ")
                     cell.textLabel?.text = splitItemData
                     cell.textLabel?.numberOfLines = 0
                     return cell

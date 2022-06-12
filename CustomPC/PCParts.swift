@@ -109,8 +109,7 @@ class PcParts {
         }
         return 0
     }
-    var zoomImage = [URL]()
-    var specs = [Spec]()
+    var specs = [String]()
 }
 
 class Spec {
