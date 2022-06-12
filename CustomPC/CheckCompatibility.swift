@@ -9,7 +9,7 @@ import Foundation
 
 class CheckCompatibility {
     
-    static func isSelectedCpuMotherBoard(selected: [PcParts]) -> Bool{
+    static func isSelectedCpuMotherBoard(selected: [PcParts]) -> [PcParts]?{
         var cpu:PcParts?
         var motherboard:PcParts?
         
@@ -24,14 +24,13 @@ class CheckCompatibility {
         }
         
         if let cpu = cpu, let motherboard = motherboard {
-            if (compatibilityCpuMotherboard(cpu: cpu, motherboard: motherboard)) {
-                return true
-            }
+            let parts = [cpu, motherboard]
+            return parts
         }
-        return false
+        return nil
     }
     
-    static func isSelectedCpuCoolerMotherBoard(selected: [PcParts]) -> Bool{
+    static func isSelectedCpuCoolerMotherBoard(selected: [PcParts]) -> [PcParts]?{
         var cpuCooler:PcParts?
         var motherboard:PcParts?
         
@@ -46,11 +45,10 @@ class CheckCompatibility {
         }
         
         if let cpuCooler = cpuCooler, let motherboard = motherboard {
-            if (compatibilityCpucoolerMotherboard(cpuCooler: cpuCooler, motherBoard: motherboard)) {
-                return true
-            }
+            let parts = [cpuCooler, motherboard]
+            return parts
         }
-        return false
+        return nil
     }
 
     static func compatibilityCpuMotherboard(cpu: PcParts, motherboard:PcParts) -> Bool {
@@ -62,8 +60,8 @@ class CheckCompatibility {
             return false
         }
         
-        let cpuSocket = cpu.specs[1].replacingOccurrences(of: "ソケット形状 ", with: "")
-        let motherboardSocket = motherboard.specs[1].replacingOccurrences(of: "CPUソケット", with: "")
+        let cpuSocket = cpu.specs[1].replacingOccurrences(of: "ソケット形状 ", with: "").replacingOccurrences(of: "Socket ", with: "")
+        let motherboardSocket = motherboard.specs[1].replacingOccurrences(of: "CPUソケット", with: "").replacingOccurrences(of: "Socket", with: "")
         
         if (cpuSocket != motherboardSocket) {
             // CPUソケットが一致しない場合
@@ -83,7 +81,8 @@ class CheckCompatibility {
     static func compatibilityCpucoolerMotherboard(cpuCooler: PcParts, motherBoard: PcParts) -> Bool{
         let motherBoardSocket = motherBoard.specs[0]
         if (motherBoardSocket.contains("INTEL")){
-            let motherSocket = motherBoardSocket.replacingOccurrences(of: "CPUソケット", with: "")
+            print("here")
+            let motherSocket = motherBoard.specs[1].replacingOccurrences(of: "CPUソケット", with: "")
             let combineIntelSocket = cpuCooler.specs[0].replacingOccurrences(of: "Intel対応ソケットLGA ", with: "").replacingOccurrences(of: "LGA ", with: "/")
             let sockets = combineIntelSocket.split(separator: "/")
             
@@ -94,11 +93,12 @@ class CheckCompatibility {
         }
         
         if(motherBoardSocket.contains("AMD")){
-            let motherSocket = motherBoardSocket.replacingOccurrences(of: "CPUソケットSocket", with: "")
-            let combineIntelSocket = cpuCooler.specs[0].replacingOccurrences(of: "AMD対応ソケットLGA ", with: "")
+            let motherSocket = motherBoard.specs[1].replacingOccurrences(of: "CPUソケットSocket", with: "")
+            let combineIntelSocket = cpuCooler.specs[1].replacingOccurrences(of: "AMD対応ソケット", with: "")
             let sockets = combineIntelSocket.split(separator: "/")
             
             for sc in sockets {
+                 print(sc)
                 if (sc == motherSocket && !motherSocket.contains("/")) { return true }
                 
                 let motherSockets = motherSocket.split(separator: "/")

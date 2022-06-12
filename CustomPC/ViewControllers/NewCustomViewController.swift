@@ -27,16 +27,18 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             self.selectTable.reloadData()
         }
         
-        // CPUとマザーボードが選択されているか判定
-        var count = 0
-        for parts in selectedParts {
-            if (parts.category.rawValue == "CPU" || parts.category.rawValue == "マザーボード") {
-                count += 1
+        // パーツ互換性チェック
+        if let cpuAndMother = CheckCompatibility.isSelectedCpuMotherBoard(selected: self.selectedParts) {
+            if (CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1])){
+            
             }
         }
         
-        if (count == 2){
-            print("check")
+        if let cpuCoolerAndMother = CheckCompatibility.isSelectedCpuCoolerMotherBoard(selected: self.selectedParts) {
+            print("selected")
+            if (CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1])) {
+                print("point")
+            }
         }
     }
     
@@ -72,12 +74,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         let selected = parts[indexPath.row]
         SearchParts.searchParts(selectedCategory: selected, searchURL: selected.startPageUrl()) { parts in
             DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
-            let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
+                let storyboard = UIStoryboard(name: "SearchPartsViewController", bundle: nil)
+                let nextVC = storyboard.instantiateViewController(identifier: "SearchPartsViewController")as! SearchPartsViewController
                 nextVC.pcPartsSeq = parts
                 nextVC.selectedCategory = selected
                 nextVC.selectedParts = self.selectedParts
-            self.navigationController?.pushViewController(nextVC, animated: true)
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
     }
