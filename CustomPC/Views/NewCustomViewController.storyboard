@@ -34,11 +34,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="04H-Xh-Rmw">
-                                <rect key="frame" x="0.0" y="88" width="414" height="556"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="550"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="414" id="NaS-NO-g3u"/>
-                                    <constraint firstAttribute="height" constant="556" id="ho2-Tw-mcc"/>
+                                    <constraint firstAttribute="height" constant="550" id="ho2-Tw-mcc"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="partsCell" id="5nZ-Iw-wOf">
@@ -56,28 +56,56 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POg-7z-xhs">
-                                <rect key="frame" x="246" y="660" width="160" height="50"/>
+                                <rect key="frame" x="8" y="729" width="180" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="75h-ej-089"/>
-                                    <constraint firstAttribute="width" constant="160" id="nsH-zB-0Wf"/>
+                                    <constraint firstAttribute="height" constant="50" id="FVu-jO-5u9"/>
+                                    <constraint firstAttribute="width" constant="180" id="ibh-FX-d6W"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="1" green="0.26102107679999997" blue="0.2012768976" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="highlightedColor" name="AccentColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlX-cc-KLA">
+                                <rect key="frame" x="0.0" y="638" width="414" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="MvP-t6-duV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="highlightedColor" systemColor="labelColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0M-dA-S9D">
+                                <rect key="frame" x="218" y="729" width="180" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ish-hJ-4bW"/>
+                                    <constraint firstAttribute="width" constant="180" id="Lom-fm-TYO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="見積もり保存">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="neC-FC-Epy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="neC-FC-Epy" firstAttribute="trailing" secondItem="POg-7z-xhs" secondAttribute="trailing" constant="8" id="5sq-vL-9D6"/>
+                            <constraint firstItem="zlX-cc-KLA" firstAttribute="top" secondItem="04H-Xh-Rmw" secondAttribute="bottom" id="53r-dy-ZpS"/>
+                            <constraint firstItem="neC-FC-Epy" firstAttribute="trailing" secondItem="zlX-cc-KLA" secondAttribute="trailing" id="7bV-sN-6dc"/>
                             <constraint firstItem="04H-Xh-Rmw" firstAttribute="leading" secondItem="neC-FC-Epy" secondAttribute="leading" id="8Td-0D-asP"/>
-                            <constraint firstItem="POg-7z-xhs" firstAttribute="top" secondItem="04H-Xh-Rmw" secondAttribute="bottom" constant="16" id="edx-oH-ba7"/>
+                            <constraint firstItem="POg-7z-xhs" firstAttribute="top" secondItem="zlX-cc-KLA" secondAttribute="bottom" constant="16" id="Ogl-98-SKZ"/>
+                            <constraint firstItem="zlX-cc-KLA" firstAttribute="leading" secondItem="neC-FC-Epy" secondAttribute="leading" id="Udz-8B-CRq"/>
+                            <constraint firstItem="Q0M-dA-S9D" firstAttribute="top" secondItem="zlX-cc-KLA" secondAttribute="bottom" constant="16" id="coG-Ol-OJ0"/>
                             <constraint firstItem="04H-Xh-Rmw" firstAttribute="trailing" secondItem="neC-FC-Epy" secondAttribute="trailing" id="idb-qN-NdU"/>
+                            <constraint firstItem="neC-FC-Epy" firstAttribute="trailing" secondItem="Q0M-dA-S9D" secondAttribute="trailing" constant="16" id="pFS-kP-zUd"/>
                             <constraint firstItem="04H-Xh-Rmw" firstAttribute="top" secondItem="neC-FC-Epy" secondAttribute="top" id="rr8-fB-Z6c"/>
+                            <constraint firstItem="POg-7z-xhs" firstAttribute="leading" secondItem="neC-FC-Epy" secondAttribute="leading" constant="8" id="w3X-ZG-isC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SAh-8x-FZQ"/>
                     <connections>
+                        <outlet property="compatibilityLabel" destination="zlX-cc-KLA" id="hGi-jH-ADH"/>
+                        <outlet property="keepButton" destination="Q0M-dA-S9D" id="RAF-FA-Dgw"/>
                         <outlet property="priceLabel" destination="POg-7z-xhs" id="ZkX-96-NqJ"/>
                         <outlet property="selectTable" destination="04H-Xh-Rmw" id="rvY-xt-5KF"/>
                     </connections>
@@ -91,6 +119,9 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

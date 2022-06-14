@@ -24,29 +24,29 @@ enum category: String {
     func startPageUrl() -> String{
         switch self {
         case .cpu:
-            return "https://kakaku.com/search_results/cpu/"
+            return "https://kakaku.com/search_results/cpu/?category=0001"
         case .cpuCooler:
-            return "https://kakaku.com/search_results/cpu%83N%81%5B%83%89%81%5B/"
+            return "https://kakaku.com/search_results/cpu%83N%81%5B%83%89%81%5B/?category=0001"
         case .memory:
-            return "https://kakaku.com/search_results/ddr4%83%81%83%82%83%8A/"
+            return "https://kakaku.com/search_results/ddr4%83%81%83%82%83%8A/?category=0001"
         case .motherBoard:
-            return "https://kakaku.com/search_results/%83%7D%83U%81%5B%83%7B%81%5B%83h/"
+            return "https://kakaku.com/search_results/%83%7D%83U%81%5B%83%7B%81%5B%83h/?category=0001"
         case .graphicsCard:
-            return "https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/"
+            return "https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001"
         case .ssd:
-            return "https://kakaku.com/search_results/SSD/"
+            return "https://kakaku.com/search_results/SSD/?category=0001"
         case .hdd:
-            return "https://kakaku.com/search_results/hdd/"
+            return "https://kakaku.com/search_results/hdd/?category=0001"
         case .pcCase:
-            return "https://kakaku.com/search_results/pc%83P%81%5B%83X/"
+            return "https://kakaku.com/search_results/pc%83P%81%5B%83X/?category=0001"
         case .powerUnit:
-            return "https://kakaku.com/search_results/%93d%8C%B9%83%86%83j%83b%83g/"
+            return "https://kakaku.com/search_results/%93d%8C%B9%83%86%83j%83b%83g/?category=0001"
         case .caseFan:
-            return "https://kakaku.com/search_results/%83P%81%5B%83X%83t%83%40%83%93/"
+            return "https://kakaku.com/search_results/%83P%81%5B%83X%83t%83%40%83%93/?category=0001"
         case .monitor:
-            return "https://kakaku.com/search_results/%83%82%83j%83%5E%81%5B/"
+            return "https://kakaku.com/search_results/%83%82%83j%83%5E%81%5B/?category=0001"
         case .testParts:
-            return "https://kakaku.com/search_results/%93d%8C%B9/"
+            return "https://kakaku.com/search_results/%93d%8C%B9/?category=0001"
         }
     }
     

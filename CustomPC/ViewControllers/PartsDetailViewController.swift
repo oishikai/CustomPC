@@ -123,11 +123,16 @@ class PartsDetailViewController: UIViewController{
         if (!isSelected){
             selectedParts.append(pcparts)
         }
+        var totalPrice = 0
+        for parts in selectedParts {
+            totalPrice += parts.getPriceInt()
+        }
         
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
+            //nextVC.priceLabel.text = "¥" + String.localizedStringWithFormat("%d", totalPrice)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
