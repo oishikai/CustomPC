@@ -34,8 +34,8 @@ class PartsDetailViewController: UIViewController{
         priceLabel.backgroundColor = UIColor.white
         specTableView.layer.borderColor = UIColor.darkGray.cgColor
         specTableView.layer.borderWidth = 1.0
-//        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
-//        priceTableView.layer.borderWidth = 1.0
+        //        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
+        //        priceTableView.layer.borderWidth = 1.0
         searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
         self.navigationItem.rightBarButtonItem = searchButtonItem
         
@@ -133,6 +133,23 @@ class PartsDetailViewController: UIViewController{
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
             //nextVC.priceLabel.text = "¥" + String.localizedStringWithFormat("%d", totalPrice)
+            let transition = CATransition()
+            //CATransitionというメソッドを使う
+            
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            
+            //なんか色々書いてあるけどよくわからない
+            
+            transition.type = CATransitionType.push
+            
+            //push遷移するよという定義
+            
+            transition.subtype = CATransitionSubtype.fromLeft
+            
+            //kCATransitionFromLeftのLeftをRightにすれば右遷移に変わる
+            
+            self.navigationController!.view.layer.add(transition, forKey: nil)
+            
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
