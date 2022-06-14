@@ -8,12 +8,17 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     @IBOutlet weak var compatibilityLabel: UILabel!
     @IBOutlet weak var keepButton: UIButton!
     
+    var cancelButton: UIBarButtonItem!
+    
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         selectTable.layer.borderColor = UIColor.darkGray.cgColor
         selectTable.layer.borderWidth = 0.5
+        
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
+        self.navigationItem.leftBarButtonItem = cancelButton
         
         compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
         compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
@@ -60,6 +65,9 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         self.compatibilityLabel.text = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
     }
     
+    @IBAction func didTapCancel(_ sender: Any) {
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return parts.count
     }
