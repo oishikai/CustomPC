@@ -13,12 +13,13 @@ import Kanna
 class SearchParts {
     // SearchPartsViewController遷移時(未検索時)の情報取得
     static func searchParts(selectedCategory: category, searchURL:String, completionHandler: @escaping (Array<PcParts>) -> Void) {
+        print(searchURL)
         // alamofile encodingの引数にshiftJisを指定して文字化け回避
         AF.request(searchURL).responseString (encoding: String.Encoding.shiftJIS){ response in
             if let html = response.value {
                 if let doc = try? HTML(html: html, encoding: String.Encoding.utf8) {
                     var goods = [Goods]()
-                    var goodsPath = 4 // 画像付き広告がない場合の商品のdivタグの位置
+                    var goodsPath = 5 // 画像付き広告がない場合の商品のdivタグの位置
                     // 画像のurl全取得
                     var imageUrls = [URL]()
                     for node in doc.css("img[data-src]") {
@@ -54,7 +55,7 @@ class SearchParts {
                     }
                     
                     // ページのセル数取得
-                    let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[4]/div/div").count
+                    let elements: Int = doc.xpath("//*[@id='default']/div[2]/div[2]/div/div[5]/div/div").count
                     
                     // 商品のタイトル、メーカー、値段の情報を取得し、画像と一緒にGoodsクラスとしてインスタンス化
                     for i in 1 ... (elements) {
@@ -104,7 +105,7 @@ class SearchParts {
         // 検索ワードを "カテゴリ名+入力値" とする
         let addCategoryPhrase = selectedCategory.rawValue + " " + word
         let encoded = addCategoryPhrase.sjisPercentEncoded
-        let urlString = "https://kakaku.com/search_results/\(encoded)/"
+        let urlString = "https://kakaku.com/search_results/\(encoded)/?category=0001"
         // 検索ワードをSJISにエンコードしたURLで情報取得
         searchParts(selectedCategory: selectedCategory, searchURL: urlString) { parts in
             completionHandler(parts)

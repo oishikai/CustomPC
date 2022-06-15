@@ -4,11 +4,27 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     var selectedParts:[PcParts] = []
     @IBOutlet weak var selectTable: UITableView!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var compatibilityLabel: UILabel!
+    @IBOutlet weak var keepButton: UIButton!
     
-    private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor, category.testParts]
+    var cancelButton: UIBarButtonItem!
+    
+    private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
     
     override func viewDidLoad() {
+        self.title = "Combination"
         super.viewDidLoad()
+        selectTable.layer.borderColor = UIColor.darkGray.cgColor
+        selectTable.layer.borderWidth = 0.5
+        
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
+        self.navigationItem.leftBarButtonItem = cancelButton
+        
+        compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+        compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
+        keepButton.backgroundColor = UIColor.red
+        keepButton.layer.cornerRadius = 10
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         selectTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
@@ -24,22 +40,47 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         
         let yen = "¥" + String.localizedStringWithFormat("%d", totalPrice)
         DispatchQueue.main.async {
+            self.priceLabel.text = yen
             self.selectTable.reloadData()
         }
         
         // パーツ互換性チェック
+        var compCpuMother :Bool? = nil
         if let cpuAndMother = CheckCompatibility.isSelectedCpuMotherBoard(selected: self.selectedParts) {
-            if (CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1])){
-            
+            if CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1]){
+                compCpuMother = true
+            }else {
+                compCpuMother = false
             }
         }
         
+        var compCpuCoolerMother :Bool? = nil
         if let cpuCoolerAndMother = CheckCompatibility.isSelectedCpuCoolerMotherBoard(selected: self.selectedParts) {
-            print("selected")
-            if (CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1])) {
-                print("point")
+            if CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1]) {
+                compCpuCoolerMother = true
+            }else {
+                compCpuCoolerMother = false
             }
         }
+        
+        self.compatibilityLabel.text = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
+    }
+    
+    @IBAction func didTapCancel(_ sender: Any) {
+        let alert = UIAlertController(title: "見積もりキャンセル", message: "選択したパーツは保存されません", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
