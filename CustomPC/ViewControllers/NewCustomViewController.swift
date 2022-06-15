@@ -13,6 +13,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
     
     override func viewDidLoad() {
+        self.title = "Combination"
         super.viewDidLoad()
         selectTable.layer.borderColor = UIColor.darkGray.cgColor
         selectTable.layer.borderWidth = 0.5
@@ -66,8 +67,22 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     @IBAction func didTapCancel(_ sender: Any) {
+        let alert = UIAlertController(title: "見積もりキャンセル", message: "選択したパーツは保存されません", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
         
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return parts.count
     }
