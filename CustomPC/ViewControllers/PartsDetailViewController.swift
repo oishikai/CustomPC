@@ -34,8 +34,6 @@ class PartsDetailViewController: UIViewController{
         priceLabel.backgroundColor = UIColor.white
         specTableView.layer.borderColor = UIColor.darkGray.cgColor
         specTableView.layer.borderWidth = 1.0
-        //        priceTableView.layer.borderColor = UIColor.darkGray.cgColor
-        //        priceTableView.layer.borderWidth = 1.0
         searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
         self.navigationItem.rightBarButtonItem = searchButtonItem
         
