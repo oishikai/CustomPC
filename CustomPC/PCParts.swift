@@ -82,6 +82,35 @@ enum category: String {
             return []
         }
     }
+    
+    static func restoreFromRawValue(value: String) -> category {
+        switch (value) {
+        case "CPU":
+            return .cpu
+        case "CPUクーラー":
+            return .cpuCooler
+        case "メモリー":
+            return .memory
+        case "マザーボード":
+            return .motherBoard
+        case "グラフィックボード・ビデオカード":
+            return .graphicsCard
+        case "SSD":
+            return .ssd
+        case "ハードディスク・HDD":
+            return .hdd
+        case "PCケース":
+            return .pcCase
+        case "電源ユニット":
+            return .powerUnit
+        case "ケースファン":
+            return .caseFan
+        case "PCモニター・液晶ディスプレイ":
+            return .monitor
+        default:
+            return .cpu
+        }
+    }
 }
 
 class PcParts {
