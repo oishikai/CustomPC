@@ -4,7 +4,7 @@
         <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Parts" inverseName="relationship" inverseEntity="Parts"/>
+        <relationship name="parts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Parts" inverseName="custom" inverseEntity="Parts"/>
     </entity>
     <entity name="Parts" representedClassName="Parts" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String"/>
@@ -13,7 +13,7 @@
         <attribute name="maker" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Custom" inverseName="relationship" inverseEntity="Custom"/>
+        <relationship name="custom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Custom" inverseName="parts" inverseEntity="Custom"/>
     </entity>
     <elements>
         <element name="Custom" positionX="-244.375" positionY="137.75390625" width="128" height="103"/>
