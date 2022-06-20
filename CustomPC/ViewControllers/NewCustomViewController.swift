@@ -86,12 +86,23 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     @IBAction func didTapKeepButton(_ sender: Any) {
+        
+        if (selectedParts.count == 0) {
+            let alert = UIAlertController(title: "パーツを選択してください", message: "", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .cancel) { (acrion) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        var alertTextField:UITextField!
         alert.title = "見積もりタイトル"
         //alert.message = "例"
         alert.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
-            
+            alertTextField = textField
         })
         
         alert.addAction(
@@ -99,6 +110,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 title: "追加",
                 style: .default,
                 handler: {(action) -> Void in
+                    print(alertTextField.text!)
+                    if (alertTextField.text! == ""){
+                        print("hi")
+                    }
+                    print(self.priceLabel.text)
+                    AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
                 })
         )
         
