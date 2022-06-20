@@ -12,20 +12,25 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     @IBOutlet weak var customTable: UITableView!
     var addBarButtonItem: UIBarButtonItem!
     
+    var customs:[Custom]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Customs"
         addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped(_:)))
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
+        
+        customs = AccessData.getCustoms()
+        print(customs.count)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return customs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = "あいうえお"
+        var cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = customs[indexPath.row].title
         return cell
     }
     

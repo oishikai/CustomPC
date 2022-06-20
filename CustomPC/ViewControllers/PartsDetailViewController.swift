@@ -121,16 +121,32 @@ class PartsDetailViewController: UIViewController{
         if (!isSelected){
             selectedParts.append(pcparts)
         }
-        var totalPrice = 0
-        for parts in selectedParts {
-            totalPrice += parts.getPriceInt()
+        
+        var compCpuMother :Bool? = nil
+        if let cpuAndMother = CheckCompatibility.isSelectedCpuMotherBoard(selected: self.selectedParts) {
+            if CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1]){
+                compCpuMother = true
+            }else {
+                compCpuMother = false
+            }
         }
+        
+        var compCpuCoolerMother :Bool? = nil
+        if let cpuCoolerAndMother = CheckCompatibility.isSelectedCpuCoolerMotherBoard(selected: self.selectedParts) {
+            if CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1]) {
+                compCpuCoolerMother = true
+            }else {
+                compCpuCoolerMother = false
+            }
+        }
+        
+        // = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
         
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
-            //nextVC.priceLabel.text = "¥" + String.localizedStringWithFormat("%d", totalPrice)
+            nextVC.compatibilityMsg = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
             let transition = CATransition()
             //CATransitionというメソッドを使う
             
