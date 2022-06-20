@@ -24,7 +24,7 @@ class AccessData {
         return nil
     }
     
-    static func storeParts(custom:Custom, parts:PcParts) {
+    private static func storeParts(custom:Custom, parts:PcParts) {
         let storeParts = Parts(context: self.managedObjectContext)
         
         storeParts.category = parts.category.rawValue
@@ -37,7 +37,7 @@ class AccessData {
         custom.addToParts(storeParts)
     }
     
-    static func storeCustom(title:String, price:String, message:String) {
+    static func storeCustom(title:String, price:String, message:String, parts:[PcParts]) {
         guard let _ = getCustoms() else { return }
         
         var customs = getCustoms()
@@ -46,6 +46,10 @@ class AccessData {
         newCustom.title = title
         newCustom.price = price
         newCustom.message = message
+        
+        for p in parts {
+            storeParts(custom: newCustom, parts: p)
+        }
         
         customs?.append(newCustom)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
