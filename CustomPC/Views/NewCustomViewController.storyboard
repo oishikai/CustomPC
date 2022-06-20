@@ -85,6 +85,9 @@
                                 <state key="normal" title="見積もり保存">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapKeepButton:" destination="0OE-Hy-lbJ" eventType="touchUpInside" id="kjD-Lq-lE8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="neC-FC-Epy"/>
