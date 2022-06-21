@@ -22,6 +22,17 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         
         customs = AccessData.getCustoms()
         print(customs.count)
+        
+        for i in customs {
+            let a = i.parts?.allObjects as! [Parts]
+            for j in a {
+                print(j.title)
+            }
+        }
+        
+        let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
+        customTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
+        customTable.rowHeight = UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,8 +40,8 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = customs[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
+        cell.setupCustomListCell(custom: customs[indexPath.row])
         return cell
     }
     

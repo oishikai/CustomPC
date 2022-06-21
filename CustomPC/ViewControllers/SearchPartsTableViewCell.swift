@@ -44,4 +44,22 @@ class SearchPartsTableViewCell: UITableViewCell {
         
         Nuke.loadImage(with: parts.image, into: partsImageView)
     }
+    
+    func setupCustomListCell(custom : Custom) {
+        let parts = custom.parts?.allObjects as! [Parts]
+        let initialPartsImage = parts[0].img!
+        let msg = custom.message!
+        
+        partsTitleLabel.text = custom.title
+        
+        if (msg.contains("❗️")){
+            partsMakerLabel.text = "❗️パーツの互換性に問題があります"
+            partsMakerLabel.font = UIFont.systemFont(ofSize: 15.0)
+        }else{
+            partsMakerLabel.text = ""
+        }
+        
+        partsPriceLabel.text = custom.price
+        Nuke.loadImage(with: initialPartsImage, into: partsImageView)
+    }
 }
