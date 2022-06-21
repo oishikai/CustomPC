@@ -21,14 +21,6 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
         
         customs = AccessData.getCustoms()
-        print(customs.count)
-        
-        for i in customs {
-            let a = i.parts?.allObjects as! [Parts]
-            for j in a {
-                print(j.title)
-            }
-        }
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         customTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
