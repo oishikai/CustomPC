@@ -35,6 +35,12 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         customTable.rowHeight = UITableView.automaticDimension
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        customs = AccessData.getCustoms()
+        DispatchQueue.main.async {
+            self.customTable.reloadData()
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
