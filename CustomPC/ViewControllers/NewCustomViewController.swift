@@ -116,6 +116,9 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                     }
                     print(self.priceLabel.text)
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 })
         )
         

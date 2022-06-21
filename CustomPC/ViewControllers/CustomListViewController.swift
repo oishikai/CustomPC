@@ -21,16 +21,25 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
         
         customs = AccessData.getCustoms()
-        print(customs.count)
+        
+        let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
+        customTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
+        customTable.rowHeight = UITableView.automaticDimension
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        customs = AccessData.getCustoms()
+        DispatchQueue.main.async {
+            self.customTable.reloadData()
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = customs[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
+        cell.setupCustomListCell(custom: customs[indexPath.row])
         return cell
     }
     
