@@ -15,6 +15,8 @@
 		2A2B766228092DCF00550054 /* SearchPartsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */; };
 		2A36E2882802953F0075C952 /* SearchPartsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */; };
 		2A36E28A2802963C0075C952 /* SearchPartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36E2892802963C0075C952 /* SearchPartsViewController.swift */; };
+		2A523FEE28636C0400B50FCA /* CustomModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A523FED28636C0400B50FCA /* CustomModalViewController.swift */; };
+		2A523FF028636D2D00B50FCA /* CustomModalViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A523FEF28636D2D00B50FCA /* CustomModalViewController.storyboard */; };
 		2A6FA2162806814400B27677 /* PCParts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6FA2152806814400B27677 /* PCParts.swift */; };
 		2A71B5CA2802B35A00F636E1 /* SearchParts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A71B5C92802B35A00F636E1 /* SearchParts.swift */; };
 		2A9C069827B6736200280671 /* NewCustomViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A9C069727B6736200280671 /* NewCustomViewController.storyboard */; };
@@ -66,6 +68,8 @@
 		2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPartsTableViewCell.swift; sourceTree = "<group>"; };
 		2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchPartsViewController.storyboard; sourceTree = "<group>"; };
 		2A36E2892802963C0075C952 /* SearchPartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPartsViewController.swift; sourceTree = "<group>"; };
+		2A523FED28636C0400B50FCA /* CustomModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModalViewController.swift; sourceTree = "<group>"; };
+		2A523FEF28636D2D00B50FCA /* CustomModalViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomModalViewController.storyboard; sourceTree = "<group>"; };
 		2A6FA2152806814400B27677 /* PCParts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCParts.swift; sourceTree = "<group>"; };
 		2A71B5C92802B35A00F636E1 /* SearchParts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParts.swift; sourceTree = "<group>"; };
 		2A9C069727B6736200280671 /* NewCustomViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCustomViewController.storyboard; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				2A9C069727B6736200280671 /* NewCustomViewController.storyboard */,
 				2A2B765F280927B500550054 /* SearchPartsTableViewCell.xib */,
 				2A36E2872802953F0075C952 /* SearchPartsViewController.storyboard */,
+				2A523FEF28636D2D00B50FCA /* CustomModalViewController.storyboard */,
 				2AFAE15C27B665D400D74495 /* LaunchScreen.storyboard */,
 				2AD853E42815A125000C9CF6 /* PartsDetailViewController.storyboard */,
 				2A041D54284AE81B002BCA77 /* PartsWebViewController.storyboard */,
@@ -148,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				2AFAE15227B665D300D74495 /* CustomListViewController.swift */,
+				2A523FED28636C0400B50FCA /* CustomModalViewController.swift */,
 				2A041D52284AE02A002BCA77 /* PartsWebViewController.swift */,
 				2A2B766128092DCF00550054 /* SearchPartsTableViewCell.swift */,
 				2A9C069927B676C000280671 /* NewCustomViewController.swift */,
@@ -353,6 +359,7 @@
 				2A2B7660280927B500550054 /* SearchPartsTableViewCell.xib in Resources */,
 				2AD853E52815A125000C9CF6 /* PartsDetailViewController.storyboard in Resources */,
 				2A36E2882802953F0075C952 /* SearchPartsViewController.storyboard in Resources */,
+				2A523FF028636D2D00B50FCA /* CustomModalViewController.storyboard in Resources */,
 				2A9C069827B6736200280671 /* NewCustomViewController.storyboard in Resources */,
 				2AFAE15E27B665D400D74495 /* LaunchScreen.storyboard in Resources */,
 				2A041D55284AE81B002BCA77 /* PartsWebViewController.storyboard in Resources */,
@@ -499,6 +506,7 @@
 				2A71B5CA2802B35A00F636E1 /* SearchParts.swift in Sources */,
 				2A36E28A2802963C0075C952 /* SearchPartsViewController.swift in Sources */,
 				2AD853E7281651AE000C9CF6 /* PartsDetailViewController.swift in Sources */,
+				2A523FEE28636C0400B50FCA /* CustomModalViewController.swift in Sources */,
 				2A0DBACC28277FC200EA6477 /* PartsImageCollectionViewCell.swift in Sources */,
 				2AD853E3280FD963000C9CF6 /* ShiftJISEncode.swift in Sources */,
 			);

@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import FloatingPanel
 
-class CustomListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource{
-
+class CustomListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource, FloatingPanelControllerDelegate{
+    
     @IBOutlet weak var customTable: UITableView!
     var addBarButtonItem: UIBarButtonItem!
     
     var customs:[Custom]!
+    var floatingPanelController: FloatingPanelController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,14 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         customTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         customTable.rowHeight = UITableView.automaticDimension
+        
+        floatingPanelController = FloatingPanelController()
+        floatingPanelController.delegate = self
+        
+        let cmvc = CustomModalViewController()
+        floatingPanelController.set(contentViewController: cmvc)
+        //floatingPanelController.track(scrollView: <#T##UIScrollView#>)
+        //floatingPanelController.addPanel(toParent: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +43,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
             self.customTable.reloadData()
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
@@ -41,6 +52,15 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
         cell.setupCustomListCell(custom: customs[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cmvc = CustomModalViewController()
+        let fpc = FloatingPanelController()
+
+        fpc.set(contentViewController: cmvc)
+        fpc.isRemovalInteractionEnabled = true
+        self.present(fpc, animated: true, completion: nil)
     }
     
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {
