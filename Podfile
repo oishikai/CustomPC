@@ -9,6 +9,7 @@ target 'CustomPC' do
   pod 'Alamofire', '~> 5.2' 
   pod 'Kanna'
   pod 'Nuke'
+  pod 'FloatingPanel'
 
   target 'CustomPCTests' do
     inherit! :search_paths
