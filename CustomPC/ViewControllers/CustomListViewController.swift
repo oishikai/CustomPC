@@ -31,10 +31,9 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         floatingPanelController = FloatingPanelController()
         floatingPanelController.delegate = self
         
-        let cmvc = CustomModalViewController()
-        floatingPanelController.set(contentViewController: cmvc)
-        //floatingPanelController.track(scrollView: <#T##UIScrollView#>)
-        //floatingPanelController.addPanel(toParent: self)
+        //let storyboard = UIStoryboard(name: "CustomModalViewController", bundle: nil)
+        //let cmvc = CustomModalViewController.fromStoryboard()
+//        floatingPanelController.set(contentViewController: cmvc)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +43,15 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         }
     }
     
+    func showModal(vc:CustomModalViewController){
+        let fpc = FloatingPanelController()
+        fpc.delegate = self
+        fpc.surfaceView.layer.cornerRadius = 24.0
+        fpc.set(contentViewController: vc)
+                   
+        fpc.addPanel(toParent: self)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
@@ -55,12 +63,17 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cmvc = CustomModalViewController()
-        let fpc = FloatingPanelController()
-
-        fpc.set(contentViewController: cmvc)
-        fpc.isRemovalInteractionEnabled = true
-        self.present(fpc, animated: true, completion: nil)
+//        let cmvc = CustomModalViewController()
+//        let fpc = FloatingPanelController()
+//
+//        fpc.set(contentViewController: cmvc)
+//        fpc.isRemovalInteractionEnabled = true
+//        self.present(fpc, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(identifier: "CustomModalViewController") as? CustomModalViewController else {
+            return
+        }
+        self.showModal(vc: vc)
     }
     
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {

@@ -9,27 +9,6 @@ import UIKit
 import Nuke
 
 class SearchPartsTableViewCell: UITableViewCell {
-//    @IBOutlet private weak var repositoryImageView: UIImageView!
-//    @IBOutlet private weak var repositoryTitle: UILabel!
-//    @IBOutlet private weak var languageLabel: UILabel!
-//    @IBOutlet weak var descriptionLabel: UILabel!
-//
-//    static let cellIdentifier = String(describing: RepositoriesTableViewCell.self)
-//
-//    func setup(repository: Repository) {
-//        repositoryTitle.text = repository.fullName
-//
-//        if let url = repository.avatarImageUrl {
-//            Nuke.loadImage(with: url, into: repositoryImageView)
-//        } else {
-//            repositoryImageView.image = nil
-//        }
-//
-//        languageLabel.text = repository.language ?? ""
-//        descriptionLabel.text = repository.description ?? ""
-//        accessoryType = .disclosureIndicator
-//    }
-    
     @IBOutlet weak var partsImageView: UIImageView!
     @IBOutlet weak var partsMakerLabel: UILabel!
     @IBOutlet weak var partsTitleLabel: UILabel!
@@ -54,7 +33,7 @@ class SearchPartsTableViewCell: UITableViewCell {
         
         if (msg.contains("❗️")){
             partsMakerLabel.text = "❗️パーツの互換性に問題があります"
-            partsMakerLabel.font = UIFont.systemFont(ofSize: 15.0)
+            partsMakerLabel.font = UIFont.systemFont(ofSize: 12.0)
         }else{
             partsMakerLabel.text = ""
         }
