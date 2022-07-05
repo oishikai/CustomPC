@@ -8,13 +8,13 @@
 import UIKit
 import FloatingPanel
 
-class CustomListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource, FloatingPanelControllerDelegate{
+class CustomListViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource, FloatingPanelControllerDelegate {
     
     @IBOutlet weak var customTable: UITableView!
     var addBarButtonItem: UIBarButtonItem!
     
     var customs:[Custom]!
-    var floatingPanelController: FloatingPanelController!
+    var fpc: FloatingPanelController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +28,8 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         customTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         customTable.rowHeight = UITableView.automaticDimension
         
-        floatingPanelController = FloatingPanelController()
-        floatingPanelController.delegate = self
-        
-        //let storyboard = UIStoryboard(name: "CustomModalViewController", bundle: nil)
-        //let cmvc = CustomModalViewController.fromStoryboard()
-//        floatingPanelController.set(contentViewController: cmvc)
+        fpc = FloatingPanelController()
+        fpc.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,12 +42,11 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     func showModal(vc:CustomModalViewController){
         let fpc = FloatingPanelController()
         fpc.delegate = self
-        fpc.surfaceView.layer.cornerRadius = 24.0
+        fpc.surfaceView.layer.cornerRadius = 9.0
         fpc.set(contentViewController: vc)
-                   
         fpc.addPanel(toParent: self)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
@@ -63,17 +58,9 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cmvc = CustomModalViewController()
-//        let fpc = FloatingPanelController()
-//
-//        fpc.set(contentViewController: cmvc)
-//        fpc.isRemovalInteractionEnabled = true
-//        self.present(fpc, animated: true, completion: nil)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateViewController(identifier: "CustomModalViewController") as? CustomModalViewController else {
-            return
-        }
-        self.showModal(vc: vc)
+        let contentVC = CustomModalViewController()
+        fpc.set(contentViewController: contentVC)
+        fpc.addPanel(toParent: self)
     }
     
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -84,4 +71,36 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         }
     }
 }
-
+//
+//// MARK: - FloatingPanel Delegate
+//extension CustomListViewController: FloatingPanelControllerDelegate {
+//
+//    // カスタマイズしたレイアウトに変更
+//    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
+//        return CustomFloatingPanelLayout()
+//    }
+//}
+//
+//// MARK: - FloatingPanel Layout
+//class CustomFloatingPanelLayout: FloatingPanelLayout {
+//
+//    // 初期位置
+//    var initialPosition: FloatingPanelPosition {
+//        return .tip
+//    }
+//
+//    // カスタマイズした高さ
+//    func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+//        switch position {
+//        case .full: return 16.0
+//        case .half: return 216.0
+//        case .tip: return 44.0
+//        default: return nil
+//        }
+//    }
+//
+//    // サポートする位置
+//    var supportedPositions: Set<FloatingPanelPosition> {
+//        return [.full, .half, .tip]
+//    }
+//}

@@ -54,21 +54,6 @@
             </objects>
             <point key="canvasLocation" x="-904.34782608695662" y="-510.26785714285711"/>
         </scene>
-        <!--Custom Modal View Controller-->
-        <scene sceneID="u5w-F8-hLQ">
-            <objects>
-                <viewController storyboardIdentifier="CustomModalViewController" id="XDm-MU-Svb" customClass="CustomModalViewController" customModule="CustomPC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WYw-oz-lMN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Gj3-Gm-q5b"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X0R-fI-69Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-63" y="-513"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bLs-vc-RBg">
             <objects>
