@@ -139,6 +139,48 @@ class PcParts {
         return 0
     }
     var specs = [String]()
+    
+    
+    static func restoreFromRawValue(value: String) -> category {
+        switch (value) {
+        case "CPU":
+            return .cpu
+        case "CPUクーラー":
+            return .cpuCooler
+        case "メモリー":
+            return .memory
+        case "マザーボード":
+            return .motherBoard
+        case "グラフィックボード・ビデオカード":
+            return .graphicsCard
+        case "SSD":
+            return .ssd
+        case "ハードディスク・HDD":
+            return .hdd
+        case "PCケース":
+            return .pcCase
+        case "電源ユニット":
+            return .powerUnit
+        case "ケースファン":
+            return .caseFan
+        case "PCモニター・液晶ディスプレイ":
+            return .monitor
+        default:
+            return .cpu
+        }
+    }
+    
+    static func toPcPartsFromPartsObject(partsObjects: [Parts]) -> [PcParts]{
+        var pcparts:[PcParts] = []
+        
+        for parts in partsObjects {
+            let category = PcParts.restoreFromRawValue(value: parts.category!)
+            let p = PcParts(category: category, maker: parts.maker!, title: parts.title!, price: parts.price!, image: parts.img!, detail: parts.detail!)
+            pcparts.append(p)
+        }
+        
+        return pcparts
+    }
 }
 
 class Spec {
