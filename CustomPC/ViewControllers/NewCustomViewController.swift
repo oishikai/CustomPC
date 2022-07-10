@@ -45,27 +45,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             self.priceLabel.text = yen
             self.selectTable.reloadData()
         }
-        
-        // パーツ互換性チェック
-        //        var compCpuMother :Bool? = nil
-        //        if let cpuAndMother = CheckCompatibility.isSelectedCpuMotherBoard(selected: self.selectedParts) {
-        //            if CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1]){
-        //                compCpuMother = true
-        //            }else {
-        //                compCpuMother = false
-        //            }
-        //        }
-        //
-        //        var compCpuCoolerMother :Bool? = nil
-        //        if let cpuCoolerAndMother = CheckCompatibility.isSelectedCpuCoolerMotherBoard(selected: self.selectedParts) {
-        //            if CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1]) {
-        //                compCpuCoolerMother = true
-        //            }else {
-        //                compCpuCoolerMother = false
-        //            }
-        //        }
-        //
-        //        self.compatibilityLabel.text = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
     }
     
     @IBAction func didTapCancel(_ sender: Any) {
@@ -127,8 +106,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             UIAlertAction(
                 title: "キャンセル",
                 style: .cancel
-//                ,handler: {(action) -> Void in
-//                }
             )
         )
         
@@ -136,9 +113,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         self.present(
             alert,
             animated: true
-//            ,completion: {
-//                print("アラートが表示された")
-//            }
             )
     }
     
@@ -184,6 +158,3 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         }
     }
 }
-
-
-
