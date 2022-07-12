@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-1572" y="121"/>
         </scene>
-        <!--View Controller-->
+        <!--Stored Custom View Controller-->
         <scene sceneID="4np-29-vU9">
             <objects>
-                <viewController id="d2U-X1-ROq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StoredCustomViewController" id="d2U-X1-ROq" customClass="StoredCustomViewController" customModule="CustomPC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L1d-qc-rFL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Nxv-dF-G5H">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Nxv-dF-G5H" customClass="SearchPartsTableViewCell" customModule="CustomPC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nxv-dF-G5H" id="3rI-AM-Ocg">
@@ -47,16 +47,23 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d2U-X1-ROq" id="ATG-gQ-4k6"/>
+                                    <outlet property="delegate" destination="d2U-X1-ROq" id="s74-5e-aYe"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MIp-aD-3xw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Rgg-hu-AwS"/>
+                    <connections>
+                        <outlet property="partsTable" destination="X9z-KX-mTF" id="02x-XF-85V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWw-Ob-szY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442.02898550724643" y="120.53571428571428"/>
+            <point key="canvasLocation" x="-712" y="121"/>
         </scene>
     </scenes>
     <resources>

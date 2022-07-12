@@ -15,7 +15,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBOutlet weak var searchTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     var pcPartsSeq: [PcParts] = []
-    var selectedCategory:category = category.testParts
+    var selectedCategory:category = category.cpu
     var selectedParts:[PcParts] = []
     override func viewDidLoad() {
         super.viewDidLoad()
