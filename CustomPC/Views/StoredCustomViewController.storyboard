@@ -55,11 +55,25 @@
                                     <outlet property="delegate" destination="d2U-X1-ROq" id="s74-5e-aYe"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1A-z3-E1r">
+                                <rect key="frame" x="218" y="717" width="180" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="9Zq-jZ-FyL"/>
+                                    <constraint firstAttribute="height" constant="50" id="bGl-AC-nFM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="編集"/>
+                                <connections>
+                                    <action selector="tappedUpdateButton:" destination="d2U-X1-ROq" eventType="touchUpInside" id="ASU-p7-Jyq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MIp-aD-3xw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="y1A-z3-E1r" firstAttribute="top" secondItem="X9z-KX-mTF" secondAttribute="bottom" constant="16" id="0PQ-U4-79s"/>
                             <constraint firstItem="X9z-KX-mTF" firstAttribute="trailing" secondItem="MIp-aD-3xw" secondAttribute="trailing" id="OB2-4o-c6P"/>
+                            <constraint firstItem="MIp-aD-3xw" firstAttribute="trailing" secondItem="y1A-z3-E1r" secondAttribute="trailing" constant="16" id="eet-Ni-v1k"/>
                             <constraint firstItem="X9z-KX-mTF" firstAttribute="top" secondItem="MIp-aD-3xw" secondAttribute="top" id="nhi-eV-Q2S"/>
                             <constraint firstItem="X9z-KX-mTF" firstAttribute="leading" secondItem="MIp-aD-3xw" secondAttribute="leading" id="npR-pM-rIO"/>
                         </constraints>
@@ -67,11 +81,12 @@
                     <navigationItem key="navigationItem" id="Rgg-hu-AwS"/>
                     <connections>
                         <outlet property="partsTable" destination="X9z-KX-mTF" id="02x-XF-85V"/>
+                        <outlet property="updateButton" destination="y1A-z3-E1r" id="bY3-tz-Abd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWw-Ob-szY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-712" y="121"/>
+            <point key="canvasLocation" x="-713.04347826086962" y="120.53571428571428"/>
         </scene>
     </scenes>
     <resources>

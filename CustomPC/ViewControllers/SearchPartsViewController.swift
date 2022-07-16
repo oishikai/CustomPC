@@ -43,6 +43,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
             let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
             nextVC.pcparts = self.pcPartsSeq[indexPath.row]
             nextVC.selectedParts = self.selectedParts
+            tableView.deselectRow(at: indexPath, animated: true)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

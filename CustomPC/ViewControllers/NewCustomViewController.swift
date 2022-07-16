@@ -25,7 +25,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         compatibilityLabel.text = compatibilityMsg
         compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
         compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
-        keepButton.backgroundColor = UIColor.red
+        keepButton.backgroundColor = UIColor.systemBlue
         keepButton.layer.cornerRadius = 10
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
@@ -93,7 +93,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                     if (alertTextField.text! == ""){
                         print("hi")
                     }
-                    print(self.priceLabel.text)
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
                     DispatchQueue.main.async {
                         self.navigationController?.popToRootViewController(animated: true)
@@ -153,6 +152,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 nextVC.pcPartsSeq = parts
                 nextVC.selectedCategory = selected
                 nextVC.selectedParts = self.selectedParts
+                tableView.deselectRow(at: indexPath, animated: true)
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

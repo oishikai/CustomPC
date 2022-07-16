@@ -10,6 +10,7 @@ import UIKit
 class StoredCustomViewController: UIViewController {
     
     @IBOutlet weak var partsTable: UITableView!
+    @IBOutlet weak var updateButton: UIButton!
     var customTitle = ""
     var customPrice = ""
     
@@ -19,13 +20,21 @@ class StoredCustomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sortedParts = sortParts(partsList: storedParts)
+        
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
-        
         if self.storedParts.count <= 4 {
             self.partsTable.isScrollEnabled = false
         }
+        updateButton.titleLabel?.text = "更新"
+        updateButton.titleLabel?.textColor = .white
+        updateButton.titleLabel?.font = .systemFont(ofSize: 20)
+        updateButton.backgroundColor = UIColor.systemBlue
+        updateButton.layer.cornerRadius = 10
+    }
+    
+    @IBAction func tappedUpdateButton(_ sender: Any) {
     }
 }
 
@@ -47,6 +56,7 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
             let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
             nextVC.pcparts = self.sortedParts[indexPath.row]
             nextVC.visitForSelect = false
+            tableView.deselectRow(at: indexPath, animated: true)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

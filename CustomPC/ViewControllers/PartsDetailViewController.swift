@@ -224,7 +224,5 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
-    
-    
 }
 
