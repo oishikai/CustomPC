@@ -10,7 +10,6 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var specTableView: UITableView!
-    //@IBOutlet weak var priceTableView: UITableView!
     @IBOutlet weak var selectButton: UIButton!
     
     var selectedParts:[PcParts] = []
@@ -36,13 +35,11 @@ class PartsDetailViewController: UIViewController{
         specTableView.layer.borderWidth = 1.0
         searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
         self.navigationItem.rightBarButtonItem = searchButtonItem
-        
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
             self.priceLabel.text = parts.price
             let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
-            print(parts.price)
             ParseDetails.getFullscaleImages(detailUrl: imageUrl, urls: urls) { urls in
                 self.urls = urls
                 DispatchQueue.main.async {
@@ -54,7 +51,6 @@ class PartsDetailViewController: UIViewController{
             
             ParseDetails.getSpec(detailUrl: parts.detailUrl) { specs in
                 self.specData = specs
-                print(specs)
                 DispatchQueue.main.async {
                     self.specTableView.reloadData()
                 }
@@ -140,30 +136,17 @@ class PartsDetailViewController: UIViewController{
             }
         }
         
-        // = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
-        
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
             nextVC.compatibilityMsg = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
             let transition = CATransition()
-            //CATransitionというメソッドを使う
             
             transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-            
-            //なんか色々書いてあるけどよくわからない
-            
             transition.type = CATransitionType.push
-            
-            //push遷移するよという定義
-            
             transition.subtype = CATransitionSubtype.fromLeft
-            
-            //kCATransitionFromLeftのLeftをRightにすれば右遷移に変わる
-            
             self.navigationController!.view.layer.add(transition, forKey: nil)
-            
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

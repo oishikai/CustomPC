@@ -17,7 +17,6 @@ class StoredCustomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.partsTable.allowsSelection = false
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
@@ -40,6 +39,10 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
         let sortedPartsList = StoredCustomViewController.sortParts(partsList: storedParts)
         cell.setup(parts: sortedPartsList[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     static func sortParts(partsList: [PcParts]) -> [PcParts]{
