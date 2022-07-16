@@ -16,9 +16,9 @@ class StoredCustomViewController: UIViewController {
     
     var storedParts:[PcParts] = []
     private var sortedParts:[PcParts] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 保存済みのパーツを NewCustomViewController と同じ順で表示
         self.sortedParts = sortParts(partsList: storedParts)
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
@@ -27,14 +27,18 @@ class StoredCustomViewController: UIViewController {
         if self.storedParts.count <= 4 {
             self.partsTable.isScrollEnabled = false
         }
-        updateButton.titleLabel?.text = "更新"
-        updateButton.titleLabel?.textColor = .white
-        updateButton.titleLabel?.font = .systemFont(ofSize: 20)
-        updateButton.backgroundColor = UIColor.systemBlue
+        
+        updateButton.backgroundColor = UIColor.darkGray
         updateButton.layer.cornerRadius = 10
     }
     
     @IBAction func tappedUpdateButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
+            nextVC.selectedParts = self.sortedParts
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
 

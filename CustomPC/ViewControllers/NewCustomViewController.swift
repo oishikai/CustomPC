@@ -12,6 +12,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     var compatibilityMsg:String = ""
     
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
+    private var visitForUpdate = false
     
     override func viewDidLoad() {
         self.title = "Combination"
