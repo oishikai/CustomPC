@@ -54,7 +54,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
             nextVC.storedParts = pcparts
             nextVC.customTitle = custom.title!
             nextVC.customPrice = custom.price!
-            
+            nextVC.title = custom.title!
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

@@ -81,10 +81,10 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
             }
         }
         
-        let containNilPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
+        let optionalPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
         
         var sortedPartsList :[PcParts] = []
-        for p in containNilPartsList {
+        for p in optionalPartsList {
             guard let p = p else { continue }
             sortedPartsList.append(p)
         }
