@@ -14,9 +14,11 @@ class StoredCustomViewController: UIViewController {
     var customPrice = ""
     
     var storedParts:[PcParts] = []
+    private var sortedParts:[PcParts] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.sortedParts = sortParts(partsList: storedParts)
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
@@ -25,7 +27,6 @@ class StoredCustomViewController: UIViewController {
             self.partsTable.isScrollEnabled = false
         }
     }
-    
 }
 
 extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate {
@@ -36,16 +37,21 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
-        let sortedPartsList = StoredCustomViewController.sortParts(partsList: storedParts)
-        cell.setup(parts: sortedPartsList[indexPath.row])
+        cell.setup(parts: self.sortedParts[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
+            nextVC.pcparts = self.sortedParts[indexPath.row]
+            nextVC.visitForSelect = false
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
     
-    static func sortParts(partsList: [PcParts]) -> [PcParts]{
+    private func sortParts(partsList: [PcParts]) -> [PcParts]{
         var cpu :PcParts? = nil
         var cpuCooler :PcParts? = nil
         var memory :PcParts? = nil
@@ -85,13 +91,11 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         let optionalPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
+        // nillを除く
+        let sortedPartsList = optionalPartsList.compactMap{$0}
         
-        var sortedPartsList :[PcParts] = []
-        for p in optionalPartsList {
-            guard let p = p else { continue }
-            sortedPartsList.append(p)
-        }
         
+        print(sortedPartsList[0].detailUrl)
         return sortedPartsList
     }
 }

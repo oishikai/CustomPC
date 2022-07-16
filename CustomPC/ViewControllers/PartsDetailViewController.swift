@@ -19,6 +19,7 @@ class PartsDetailViewController: UIViewController{
     private var specData = [String]()
     private var priceData = [String]()
     var searchButtonItem: UIBarButtonItem!
+    var visitForSelect = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,10 @@ class PartsDetailViewController: UIViewController{
         specTableView.layer.borderWidth = 1.0
         searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
         self.navigationItem.rightBarButtonItem = searchButtonItem
+        
+        if !visitForSelect {
+            self.selectButton.isEnabled = false
+        }
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
@@ -96,6 +101,8 @@ class PartsDetailViewController: UIViewController{
                 self.selectButton.isEnabled = false
                 self.selectButton.setTitle("価格情報が無いため選択できません", for: .normal)
             }
+        }else {
+            print("hi")
         }
         
         let layout = UICollectionViewFlowLayout()
