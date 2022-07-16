@@ -33,10 +33,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="X9z-KX-mTF">
-                                <rect key="frame" x="0.0" y="88" width="414" height="555"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="X9z-KX-mTF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="613"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="613" id="3s0-je-6Qs"/>
+                                    <constraint firstAttribute="width" constant="414" id="hBb-6n-2G0"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Nxv-dF-G5H" customClass="SearchPartsTableViewCell" customModule="CustomPC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
@@ -55,6 +58,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MIp-aD-3xw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="X9z-KX-mTF" firstAttribute="trailing" secondItem="MIp-aD-3xw" secondAttribute="trailing" id="OB2-4o-c6P"/>
+                            <constraint firstItem="X9z-KX-mTF" firstAttribute="top" secondItem="MIp-aD-3xw" secondAttribute="top" id="nhi-eV-Q2S"/>
+                            <constraint firstItem="X9z-KX-mTF" firstAttribute="leading" secondItem="MIp-aD-3xw" secondAttribute="leading" id="npR-pM-rIO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rgg-hu-AwS"/>
                     <connections>

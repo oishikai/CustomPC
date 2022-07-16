@@ -17,9 +17,14 @@ class StoredCustomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.partsTable.allowsSelection = false
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
+        
+        if self.storedParts.count <= 4 {
+            self.partsTable.isScrollEnabled = false
+        }
     }
     
 }
@@ -49,7 +54,6 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
         var powerUnit :PcParts? = nil
         var caseFan :PcParts? = nil
         var monitor :PcParts? = nil
-        
         for parts in partsList {
             switch (parts.category) {
             case .cpu:
