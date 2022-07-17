@@ -11,6 +11,7 @@ class StoredCustomViewController: UIViewController {
     
     @IBOutlet weak var partsTable: UITableView!
     @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var priceLabel: UILabel!
     var custom :Custom? = nil
     var customTitle = ""
     var customPrice = ""
@@ -27,6 +28,7 @@ class StoredCustomViewController: UIViewController {
             self.partsTable.isScrollEnabled = false
         }
         
+        self.priceLabel.text = self.customPrice
         updateButton.backgroundColor = UIColor.darkGray
         updateButton.layer.cornerRadius = 10
         
