@@ -10,11 +10,6 @@ import Foundation
 class UpdateLatestPartsInfo {
     static func fetchPartsSpec(pcParts: [PcParts], index: Int, completionHandler: @escaping ([PcParts]) -> Void) -> Void {
         ParseDetails.getSpec(detailUrl: pcParts[index].detailUrl) { specs in
-            if index == (pcParts.count - 1) {
-                completionHandler(pcParts)
-                return
-            }
-            
             if pcParts[index].category == .cpu {
                 for spec in specs {
                     if spec.contains("世代第") {
@@ -52,7 +47,13 @@ class UpdateLatestPartsInfo {
             }
             
             let nextIndex = index + 1
-            self.fetchPartsSpec(pcParts: pcParts, index: nextIndex, completionHandler: completionHandler)
+            if nextIndex == pcParts.count {
+                completionHandler(pcParts)
+                return
+            } else {
+                self.fetchPartsSpec(pcParts: pcParts, index: nextIndex, completionHandler: completionHandler)
+            }
+            //self.fetchPartsSpec(pcParts: pcParts, index: nextIndex, completionHandler: completionHandler)
         }
     }
 }

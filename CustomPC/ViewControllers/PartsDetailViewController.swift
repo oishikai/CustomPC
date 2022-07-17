@@ -13,6 +13,7 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var selectButton: UIButton!
     
     var selectedParts:[PcParts] = []
+    var storedCustom:Custom? = nil
     var pcparts: PcParts?
     private var urls = [URL]()
     private var currentIndex = 0
@@ -146,6 +147,9 @@ class PartsDetailViewController: UIViewController{
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
             nextVC.compatibilityMsg = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
+            if let custom = self.storedCustom {
+                nextVC.storedCustom = custom
+            }
             let transition = CATransition()
             
             transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)

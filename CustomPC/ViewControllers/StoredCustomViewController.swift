@@ -40,7 +40,10 @@ class StoredCustomViewController: UIViewController {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.sortedParts
-            nextVC.compatibilityMsg = (custom?.message!)!
+            if let custom = self.custom {
+                nextVC.storedCustom = custom
+                nextVC.compatibilityMsg = custom.message!
+            }
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

@@ -10,9 +10,8 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     var cancelButton: UIBarButtonItem!
     var compatibilityMsg:String = ""
-    
+    var storedCustom : Custom? = nil
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
-    private var visitForUpdate = false
     
     override func viewDidLoad() {
         self.title = "Combination"
@@ -32,6 +31,13 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         selectTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         selectTable.rowHeight = UITableView.automaticDimension
+        if let custom = self.storedCustom {
+            for s in selectedParts {
+                if s.category == .motherBoard {
+                    print(s.specs)
+                }
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,6 +101,10 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                         print("hi")
                     }
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
+                    if let custom = self.storedCustom {
+                        AccessData.deleteCustom(custom: custom)
+                        print("wasd")
+                    }
                     DispatchQueue.main.async {
                         self.navigationController?.popToRootViewController(animated: true)
                     }
@@ -153,6 +163,9 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 nextVC.pcPartsSeq = parts
                 nextVC.selectedCategory = selected
                 nextVC.selectedParts = self.selectedParts
+                if let custom = self.storedCustom {
+                    nextVC.storedCustom = custom
+                }
                 tableView.deselectRow(at: indexPath, animated: true)
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
