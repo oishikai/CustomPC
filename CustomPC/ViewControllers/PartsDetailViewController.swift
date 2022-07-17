@@ -101,8 +101,6 @@ class PartsDetailViewController: UIViewController{
                 self.selectButton.isEnabled = false
                 self.selectButton.setTitle("価格情報が無いため選択できません", for: .normal)
             }
-        }else {
-            print("hi")
         }
         
         let layout = UICollectionViewFlowLayout()
@@ -113,15 +111,15 @@ class PartsDetailViewController: UIViewController{
     
     @IBAction func selectButton(_ sender: Any) {
         guard let pcparts = self.pcparts else { return }
-        var isSelected = false
+        var selectedSameCategory = false
         for (index, p) in selectedParts.enumerated() {
             if (p.category == pcparts.category){
-                isSelected = true
+                selectedSameCategory = true
                 selectedParts[index] = pcparts
             }
         }
         
-        if (!isSelected){
+        if (!selectedSameCategory){
             selectedParts.append(pcparts)
         }
         

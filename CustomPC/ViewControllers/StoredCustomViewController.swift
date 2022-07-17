@@ -11,16 +11,15 @@ class StoredCustomViewController: UIViewController {
     
     @IBOutlet weak var partsTable: UITableView!
     @IBOutlet weak var updateButton: UIButton!
+    var custom :Custom? = nil
     var customTitle = ""
     var customPrice = ""
-    
     var storedParts:[PcParts] = []
     private var sortedParts:[PcParts] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // 保存済みのパーツを NewCustomViewController と同じ順で表示
         self.sortedParts = sortParts(partsList: storedParts)
-        
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
@@ -30,13 +29,18 @@ class StoredCustomViewController: UIViewController {
         
         updateButton.backgroundColor = UIColor.darkGray
         updateButton.layer.cornerRadius = 10
+        
+        UpdateLatestPartsInfo.fetchPartsSpec(pcParts: sortedParts, index: 0) { pcParts in
+            self.sortedParts = pcParts
+        }
     }
     
     @IBAction func tappedUpdateButton(_ sender: Any) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.sortedParts
+            nextVC.compatibilityMsg = (custom?.message!)!
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
@@ -104,13 +108,9 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
             }
         }
         
-        let optionalPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
+        let sortedPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
         // nillを除く
-        let sortedPartsList = optionalPartsList.compactMap{$0}
-        
-        
-        print(sortedPartsList[0].detailUrl)
-        return sortedPartsList
+        return sortedPartsList.compactMap{$0}
     }
 }
 

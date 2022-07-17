@@ -52,6 +52,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
             let storyboard = UIStoryboard(name: "StoredCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "StoredCustomViewController")as! StoredCustomViewController
             nextVC.storedParts = pcparts
+            nextVC.custom = custom
             nextVC.customTitle = custom.title!
             nextVC.customPrice = custom.price!
             nextVC.title = custom.title!
