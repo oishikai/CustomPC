@@ -46,7 +46,7 @@ class AccessData {
         newCustom.title = title
         newCustom.price = price
         newCustom.message = message
-        
+        newCustom.date = Date()
         for p in parts {
             storeParts(custom: newCustom, parts: p)
         }
