@@ -16,8 +16,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     override func viewDidLoad() {
         self.title = "Combination"
         super.viewDidLoad()
-        selectTable.layer.borderColor = UIColor.darkGray.cgColor
-        selectTable.layer.borderWidth = 0.5
         
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
         self.navigationItem.leftBarButtonItem = cancelButton
@@ -31,13 +29,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         selectTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         selectTable.rowHeight = UITableView.automaticDimension
-        if let custom = self.storedCustom {
-            for s in selectedParts {
-                if s.category == .motherBoard {
-                    print(s.specs)
-                }
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,7 +76,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         var alertTextField:UITextField!
         alert.title = "見積もりタイトル"
-        //alert.message = "例"
         alert.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
             alertTextField = textField
@@ -98,12 +88,10 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 handler: {(action) -> Void in
                     print(alertTextField.text!)
                     if (alertTextField.text! == ""){
-                        print("hi")
                     }
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
                     if let custom = self.storedCustom {
                         AccessData.deleteCustom(custom: custom)
-                        print("wasd")
                     }
                     DispatchQueue.main.async {
                         self.navigationController?.popToRootViewController(animated: true)

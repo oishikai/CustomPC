@@ -53,7 +53,6 @@ class UpdateLatestPartsInfo {
             } else {
                 self.fetchPartsSpec(pcParts: pcParts, index: nextIndex, completionHandler: completionHandler)
             }
-            //self.fetchPartsSpec(pcParts: pcParts, index: nextIndex, completionHandler: completionHandler)
         }
     }
 }
