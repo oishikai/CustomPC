@@ -10,14 +10,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     
     var cancelButton: UIBarButtonItem!
     var compatibilityMsg:String = ""
-    
+    var storedCustom : Custom? = nil
     private var parts = [category.cpu, category.cpuCooler, category.memory, category.motherBoard, category.graphicsCard, category.ssd, category.hdd, category.pcCase, category.powerUnit, category.caseFan, category.monitor]
     
     override func viewDidLoad() {
         self.title = "Combination"
         super.viewDidLoad()
-        selectTable.layer.borderColor = UIColor.darkGray.cgColor
-        selectTable.layer.borderWidth = 0.5
         
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
         self.navigationItem.leftBarButtonItem = cancelButton
@@ -25,7 +23,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         compatibilityLabel.text = compatibilityMsg
         compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
         compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
-        keepButton.backgroundColor = UIColor.red
+        keepButton.backgroundColor = UIColor.systemBlue
         keepButton.layer.cornerRadius = 10
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
@@ -45,27 +43,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             self.priceLabel.text = yen
             self.selectTable.reloadData()
         }
-        
-        // パーツ互換性チェック
-        //        var compCpuMother :Bool? = nil
-        //        if let cpuAndMother = CheckCompatibility.isSelectedCpuMotherBoard(selected: self.selectedParts) {
-        //            if CheckCompatibility.compatibilityCpuMotherboard(cpu: cpuAndMother[0], motherboard: cpuAndMother[1]){
-        //                compCpuMother = true
-        //            }else {
-        //                compCpuMother = false
-        //            }
-        //        }
-        //
-        //        var compCpuCoolerMother :Bool? = nil
-        //        if let cpuCoolerAndMother = CheckCompatibility.isSelectedCpuCoolerMotherBoard(selected: self.selectedParts) {
-        //            if CheckCompatibility.compatibilityCpucoolerMotherboard(cpuCooler: cpuCoolerAndMother[0], motherBoard: cpuCoolerAndMother[1]) {
-        //                compCpuCoolerMother = true
-        //            }else {
-        //                compCpuCoolerMother = false
-        //            }
-        //        }
-        //
-        //        self.compatibilityLabel.text = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
     }
     
     @IBAction func didTapCancel(_ sender: Any) {
@@ -99,7 +76,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         var alertTextField:UITextField!
         alert.title = "見積もりタイトル"
-        //alert.message = "例"
         alert.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
             alertTextField = textField
@@ -112,10 +88,11 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 handler: {(action) -> Void in
                     print(alertTextField.text!)
                     if (alertTextField.text! == ""){
-                        print("hi")
                     }
-                    print(self.priceLabel.text)
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
+                    if let custom = self.storedCustom {
+                        AccessData.deleteCustom(custom: custom)
+                    }
                     DispatchQueue.main.async {
                         self.navigationController?.popToRootViewController(animated: true)
                     }
@@ -127,8 +104,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
             UIAlertAction(
                 title: "キャンセル",
                 style: .cancel
-//                ,handler: {(action) -> Void in
-//                }
             )
         )
         
@@ -136,9 +111,6 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         self.present(
             alert,
             animated: true
-//            ,completion: {
-//                print("アラートが表示された")
-//            }
             )
     }
     
@@ -179,11 +151,12 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 nextVC.pcPartsSeq = parts
                 nextVC.selectedCategory = selected
                 nextVC.selectedParts = self.selectedParts
+                if let custom = self.storedCustom {
+                    nextVC.storedCustom = custom
+                }
+                tableView.deselectRow(at: indexPath, animated: true)
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
     }
 }
-
-
-

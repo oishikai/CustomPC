@@ -10,16 +10,17 @@ class PartsDetailViewController: UIViewController{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var specTableView: UITableView!
-    //@IBOutlet weak var priceTableView: UITableView!
     @IBOutlet weak var selectButton: UIButton!
     
     var selectedParts:[PcParts] = []
+    var storedCustom:Custom? = nil
     var pcparts: PcParts?
     private var urls = [URL]()
     private var currentIndex = 0
     private var specData = [String]()
     private var priceData = [String]()
     var searchButtonItem: UIBarButtonItem!
+    var visitForSelect = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +38,14 @@ class PartsDetailViewController: UIViewController{
         searchButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapSearch(_:)))
         self.navigationItem.rightBarButtonItem = searchButtonItem
         
+        if !visitForSelect {
+            self.selectButton.isEnabled = false
+        }
         if let parts = pcparts {
             self.makerLabel.text = "   " + parts.maker
             self.titleLabel.text = parts.title
             self.priceLabel.text = parts.price
             let imageUrl = parts.detailUrl.replacingOccurrences(of: "?lid=pc_ksearch_kakakuitem", with: "") + "images/"
-            print(parts.price)
             ParseDetails.getFullscaleImages(detailUrl: imageUrl, urls: urls) { urls in
                 self.urls = urls
                 DispatchQueue.main.async {
@@ -54,7 +57,6 @@ class PartsDetailViewController: UIViewController{
             
             ParseDetails.getSpec(detailUrl: parts.detailUrl) { specs in
                 self.specData = specs
-                print(specs)
                 DispatchQueue.main.async {
                     self.specTableView.reloadData()
                 }
@@ -110,15 +112,15 @@ class PartsDetailViewController: UIViewController{
     
     @IBAction func selectButton(_ sender: Any) {
         guard let pcparts = self.pcparts else { return }
-        var isSelected = false
+        var selectedSameCategory = false
         for (index, p) in selectedParts.enumerated() {
             if (p.category == pcparts.category){
-                isSelected = true
+                selectedSameCategory = true
                 selectedParts[index] = pcparts
             }
         }
         
-        if (!isSelected){
+        if (!selectedSameCategory){
             selectedParts.append(pcparts)
         }
         
@@ -140,30 +142,20 @@ class PartsDetailViewController: UIViewController{
             }
         }
         
-        // = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
-        
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "NewCustomViewController")as! NewCustomViewController
             nextVC.selectedParts = self.selectedParts
             nextVC.compatibilityMsg = CheckCompatibility.compatibilityMessage(cpuMother: compCpuMother, cpuCoolerMother: compCpuCoolerMother)
+            if let custom = self.storedCustom {
+                nextVC.storedCustom = custom
+            }
             let transition = CATransition()
-            //CATransitionというメソッドを使う
             
             transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-            
-            //なんか色々書いてあるけどよくわからない
-            
             transition.type = CATransitionType.push
-            
-            //push遷移するよという定義
-            
             transition.subtype = CATransitionSubtype.fromLeft
-            
-            //kCATransitionFromLeftのLeftをRightにすれば右遷移に変わる
-            
             self.navigationController!.view.layer.add(transition, forKey: nil)
-            
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
@@ -234,7 +226,5 @@ extension PartsDetailViewController: UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
-    
-    
 }
 

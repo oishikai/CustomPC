@@ -33,6 +33,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
             self.customTable.reloadData()
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return customs.count
     }
@@ -41,6 +42,22 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPartsTableViewCell.cellIdentifier, for: indexPath) as! SearchPartsTableViewCell
         cell.setupCustomListCell(custom: customs[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let custom = self.customs[indexPath.row]
+        let savedPartsObject = custom.parts?.allObjects as! [Parts]
+        let pcparts = PcParts.toPcPartsFromPartsObject(partsObjects: savedPartsObject)
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "StoredCustomViewController", bundle: nil)
+            let nextVC = storyboard.instantiateViewController(identifier: "StoredCustomViewController")as! StoredCustomViewController
+            nextVC.storedParts = pcparts
+            nextVC.custom = custom
+            nextVC.customTitle = custom.title!
+            nextVC.customPrice = custom.price!
+            nextVC.title = custom.title!
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
     
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {

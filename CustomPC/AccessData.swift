@@ -46,12 +46,27 @@ class AccessData {
         newCustom.title = title
         newCustom.price = price
         newCustom.message = message
-        
+        newCustom.date = Date()
         for p in parts {
             storeParts(custom: newCustom, parts: p)
         }
         
         customs?.append(newCustom)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    static func deleteCustom(custom: Custom){
+        let dataCondition = NSFetchRequest<NSFetchRequestResult>(entityName: "Custom")
+        let predict = NSPredicate(format: "%K = %@","date", custom.date! as CVarArg)
+        dataCondition.predicate = predict
+        do {
+            let results = try managedObjectContext.fetch(dataCondition)
+            for myData in results {
+                managedObjectContext.delete(myData as! Custom)
+                }
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }catch{
+            
+        }
     }
 }

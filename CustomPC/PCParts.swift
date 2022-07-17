@@ -19,7 +19,6 @@ enum category: String {
     case powerUnit = "電源ユニット"
     case caseFan = "ケースファン"
     case monitor = "PCモニター・液晶ディスプレイ"
-    case testParts = "ぬいぐるみ"
     
     func startPageUrl() -> String{
         switch self {
@@ -45,8 +44,6 @@ enum category: String {
             return "https://kakaku.com/search_results/%83P%81%5B%83X%83t%83%40%83%93/?category=0001"
         case .monitor:
             return "https://kakaku.com/search_results/%83%82%83j%83%5E%81%5B/?category=0001"
-        case .testParts:
-            return "https://kakaku.com/search_results/%93d%8C%B9/?category=0001"
         }
     }
     
@@ -78,8 +75,6 @@ enum category: String {
             return ["スペック", "ファンサイズ", "最大風量", "最大ノイズレベル", "最大回転数", "PWM", "コネクタ", "LEDライティング対応", "ファンコン", "ファンブレード取り外し可", "耐久性", "個数", "幅x高さx厚さ"]
         case .monitor:
             return ["基本スペック", "モニタサイズ", "モニタタイプ", "モニタ形状", "画面種類", "スリムベゼル", "アスペクト比", "表面処理", "パネル種類", "解像度", "HDR方式", "DisplayHDR", "表示色", "表示領域", "色域", "応答速度", "コントラスト比", "拡張コントラスト比", "輝度", "視野角（上下/左右）", "画素ピッチ", "水平走査周波数", "リフレッシュレート(垂直走査周波数)", "最大消費電力", "LEDバックライト", "フリッカーフリー", "1型(インチ)あたりの価格", "詳細機能", "入力端子", "スピーカー搭載", "音声出力端子", "USB HUB", "HDCP2.2", "HDCP", "リモコン", "カラーマネジメント機能", "PIP", "PBP", "VESAマウント", "MHL対応", "ゲーミングモニター", "モバイルディスプレイ", "USB PD", "メディアプレーヤ機能", "3D対応", "ブルーライト軽減", "調整機能","ピボット機能(画面回転)", "スイーベル機能(水平回転)", "チルト機能(垂直角度調節)", "高さ調節機能", "同期技術", "G-SYNC", "FreeSync", "Adaptive-Sync", "タッチパネル", "タッチパネル方式", "タッチパネル対応", "マルチタッチ", "タッチペン付属", "サイズ・重量", "幅x高さx奥行き", "重量"]
-        case .testParts:
-            return []
         }
     }
     
@@ -139,6 +134,48 @@ class PcParts {
         return 0
     }
     var specs = [String]()
+    
+    
+    static func restoreFromRawValue(value: String) -> category {
+        switch (value) {
+        case "CPU":
+            return .cpu
+        case "CPUクーラー":
+            return .cpuCooler
+        case "メモリー":
+            return .memory
+        case "マザーボード":
+            return .motherBoard
+        case "グラフィックボード・ビデオカード":
+            return .graphicsCard
+        case "SSD":
+            return .ssd
+        case "ハードディスク・HDD":
+            return .hdd
+        case "PCケース":
+            return .pcCase
+        case "電源ユニット":
+            return .powerUnit
+        case "ケースファン":
+            return .caseFan
+        case "PCモニター・液晶ディスプレイ":
+            return .monitor
+        default:
+            return .cpu
+        }
+    }
+    
+    static func toPcPartsFromPartsObject(partsObjects: [Parts]) -> [PcParts]{
+        var pcparts:[PcParts] = []
+        
+        for parts in partsObjects {
+            let category = PcParts.restoreFromRawValue(value: parts.category!)
+            let p = PcParts(category: category, maker: parts.maker!, title: parts.title!, price: parts.price!, image: parts.img!, detail: parts.detail!)
+            pcparts.append(p)
+        }
+        
+        return pcparts
+    }
 }
 
 class Spec {

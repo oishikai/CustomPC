@@ -15,8 +15,10 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     @IBOutlet weak var searchTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     var pcPartsSeq: [PcParts] = []
-    var selectedCategory:category = category.testParts
+    var selectedCategory:category = category.cpu
     var selectedParts:[PcParts] = []
+    var storedCustom:Custom? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,10 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
             let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
             nextVC.pcparts = self.pcPartsSeq[indexPath.row]
             nextVC.selectedParts = self.selectedParts
+            if let custom = self.storedCustom {
+                nextVC.storedCustom = custom
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
