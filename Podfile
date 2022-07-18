@@ -9,6 +9,7 @@ target 'CustomPC' do
   pod 'Alamofire', '~> 5.2' 
   pod 'Kanna'
   pod 'Nuke'
+  pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
 
   target 'CustomPCTests' do
     inherit! :search_paths
