@@ -19,6 +19,8 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
         self.navigationItem.leftBarButtonItem = cancelButton
+        
+        // 互換性メッセージ
         compatibilityLabel.text = compatibilityMsg
         compatibilityLabel.textColor = .white
         if compatibilityMsg.contains("問題ありません") {
@@ -28,9 +30,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         }else{
             compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
         }
-        //compatibilityLabel.text = compatibilityMsg
-        //compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
-        compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
+        
         keepButton.backgroundColor = UIColor.systemBlue
         keepButton.layer.cornerRadius = 10
         
