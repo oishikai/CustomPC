@@ -20,7 +20,7 @@ class StoredCustomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 保存済みのパーツを NewCustomViewController と同じ順で表示
-        self.sortedParts = sortParts(partsList: storedParts)
+        self.sortedParts = PcParts.sortParts(partsList: storedParts)
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
         partsTable.register(nib, forCellReuseIdentifier: SearchPartsTableViewCell.cellIdentifier)
         partsTable.rowHeight = UITableView.automaticDimension
@@ -72,50 +72,6 @@ extension StoredCustomViewController: UITableViewDataSource, UITableViewDelegate
             tableView.deselectRow(at: indexPath, animated: true)
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-    }
-    
-    private func sortParts(partsList: [PcParts]) -> [PcParts]{
-        var cpu :PcParts? = nil
-        var cpuCooler :PcParts? = nil
-        var memory :PcParts? = nil
-        var motherboard :PcParts? = nil
-        var graphicsCard :PcParts? = nil
-        var ssd :PcParts? = nil
-        var hdd :PcParts? = nil
-        var pcCase :PcParts? = nil
-        var powerUnit :PcParts? = nil
-        var caseFan :PcParts? = nil
-        var monitor :PcParts? = nil
-        for parts in partsList {
-            switch (parts.category) {
-            case .cpu:
-                cpu = parts
-            case .cpuCooler:
-                cpuCooler = parts
-            case .memory:
-                memory = parts
-            case .motherBoard:
-                motherboard = parts
-            case .graphicsCard:
-                graphicsCard = parts
-            case .ssd:
-                ssd = parts
-            case .hdd:
-                hdd = parts
-            case .pcCase:
-                pcCase = parts
-            case .powerUnit:
-                powerUnit = parts
-            case .caseFan:
-                caseFan = parts
-            case .monitor:
-                monitor = parts
-            }
-        }
-        
-        let sortedPartsList:[PcParts?] = [cpu, cpuCooler, memory, motherboard, graphicsCard, ssd, hdd, pcCase, powerUnit, caseFan, monitor]
-        // nillを除く
-        return sortedPartsList.compactMap{$0}
     }
 }
 

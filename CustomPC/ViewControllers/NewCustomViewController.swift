@@ -20,9 +20,17 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancel(_:)))
         self.navigationItem.leftBarButtonItem = cancelButton
         
+        // 互換性メッセージ
         compatibilityLabel.text = compatibilityMsg
-        compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
-        compatibilityLabel.layer.borderColor = UIColor.gray.cgColor
+        compatibilityLabel.textColor = .white
+        if compatibilityMsg.contains("問題ありません") {
+            compatibilityLabel.backgroundColor = .systemGreen
+        }else if compatibilityMsg.contains("問題があります") {
+            compatibilityLabel.backgroundColor = .systemRed
+        }else{
+            compatibilityLabel.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+        }
+        
         keepButton.backgroundColor = UIColor.systemBlue
         keepButton.layer.cornerRadius = 10
         
@@ -79,6 +87,9 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
         alert.addTextField(configurationHandler: {(textField) -> Void in
             textField.delegate = self
             alertTextField = textField
+            if let custom = self.storedCustom {
+                textField.placeholder = custom.title!
+            }
         })
         
         alert.addAction(
@@ -86,9 +97,13 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                 title: "追加",
                 style: .default,
                 handler: {(action) -> Void in
-                    print(alertTextField.text!)
-                    if (alertTextField.text! == ""){
+                    // 未入力で追加ボタンが押された場合
+                    if (alertTextField.text! == "" && self.storedCustom != nil) {
+                        alertTextField.text! = self.storedCustom?.title! ?? ""
+                    }else if (alertTextField.text! == ""){
+                        alertTextField.text! = "タイトルなし"
                     }
+                    
                     AccessData.storeCustom(title: alertTextField.text!, price: self.priceLabel.text!, message: self.compatibilityMsg, parts: self.selectedParts)
                     if let custom = self.storedCustom {
                         AccessData.deleteCustom(custom: custom)

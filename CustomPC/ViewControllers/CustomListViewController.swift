@@ -19,7 +19,7 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         self.title = "Customs"
         addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped(_:)))
         self.navigationItem.rightBarButtonItems = [addBarButtonItem]
-        
+        self.navigationItem.leftBarButtonItems = [editButtonItem]
         customs = AccessData.getCustoms()
         
         let nib = UINib(nibName: SearchPartsTableViewCell.cellIdentifier, bundle: nil)
@@ -32,6 +32,11 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         DispatchQueue.main.async {
             self.customTable.reloadData()
         }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        customTable.isEditing = editing
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +65,24 @@ class CustomListViewController: UIViewController ,UITableViewDelegate, UITableVi
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let cus = self.customs[indexPath.row]
+        customs.remove(at: indexPath.row)
+        AccessData.deleteCustom(custom: cus)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tableView.isEditing {
+            return UITableViewCell.EditingStyle.delete
+            } else {
+                return UITableViewCell.EditingStyle.none
+            }
+    }
     @objc func addBarButtonTapped(_ sender: UIBarButtonItem) {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "NewCustomViewController", bundle: nil)
