@@ -52,22 +52,22 @@ class CheckCompatibility {
     }
     
     static func compatibilityMessage(cpuMother: Bool?, cpuCoolerMother : Bool?) -> String{
-        var message = "✅選択されたパーツの互換性に問題ありません"
+        var message = "選択されたパーツの互換性に問題ありません"
         if let cpuMother = cpuMother {
             if  !cpuMother {
-                message = "❗️選択されたパーツの互換性に問題があります"
-                message += "\n❗️CPUとマザーボードのソケット"
+                message = "選択されたパーツの互換性に問題があります"
+                message += "\nCPUとマザーボードのソケット"
                 
                 if let cpuCoolerMother = cpuCoolerMother {
                     if !cpuCoolerMother {
-                        message += "\n❗️CPUクーラーとマザーボードのソケット"
+                        message += "\nCPUクーラーとマザーボードのソケット"
                     }
                 }
             }
         }else if let cpuCoolerMother = cpuCoolerMother {
             if !cpuCoolerMother {
-                message = "❗️選択されたパーツの互換性に問題があります"
-                message += "\n❗️CPUクーラーとマザーボードのソケット"
+                message = "選択されたパーツの互換性に問題があります"
+                message += "\nCPUクーラーとマザーボードのソケット"
             }
         }
         return message
@@ -119,7 +119,6 @@ class CheckCompatibility {
             if (cpuCooler.specs[1] == nil) { return false }
             let combineIntelSocket = cpuCooler.specs[1].replacingOccurrences(of: "AMD対応ソケット", with: "")
             let sockets = combineIntelSocket.split(separator: "/")
-            
             for sc in sockets {
                  print(sc)
                 if (sc == motherSocket && !motherSocket.contains("/")) { return true }
