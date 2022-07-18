@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import WebKit
 
+import SVProgressHUD
+
 class PartsWebViewController: UIViewController {
     var webView: WKWebView!
 
@@ -24,5 +26,6 @@ class PartsWebViewController: UIViewController {
             let request = URLRequest(url: URL(string: targetUrl)!)
             // リクエストをロードする
             webView.load(request)
+            SVProgressHUD.dismiss()
         }
 }

@@ -1,4 +1,5 @@
 import UIKit
+import SVProgressHUD
 
 class NewCustomViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate {
     
@@ -158,6 +159,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        SVProgressHUD.show()
         let selected = parts[indexPath.row]
         SearchParts.searchParts(selectedCategory: selected, searchURL: selected.startPageUrl()) { parts in
             DispatchQueue.main.async {
@@ -170,6 +172,7 @@ class NewCustomViewController: UIViewController,UITableViewDelegate, UITableView
                     nextVC.storedCustom = custom
                 }
                 tableView.deselectRow(at: indexPath, animated: true)
+                SVProgressHUD.dismiss()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

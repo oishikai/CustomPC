@@ -2,11 +2,15 @@ PODS:
   - Alamofire (5.5.0)
   - Kanna (5.2.7)
   - Nuke (10.7.1)
+  - SVProgressHUD (2.2.6):
+    - SVProgressHUD/Core (= 2.2.6)
+  - SVProgressHUD/Core (2.2.6)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
   - Kanna
   - Nuke
+  - SVProgressHUD (from `https://github.com/SVProgressHUD/SVProgressHUD.git`)
 
 SPEC REPOS:
   trunk:
@@ -14,11 +18,21 @@ SPEC REPOS:
     - Kanna
     - Nuke
 
+EXTERNAL SOURCES:
+  SVProgressHUD:
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+
+CHECKOUT OPTIONS:
+  SVProgressHUD:
+    :commit: de1d4dba816a19454329031156b8788692bcfa2c
+    :git: https://github.com/SVProgressHUD/SVProgressHUD.git
+
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Kanna: 01cfbddc127f5ff0963692f285fcbc8a9d62d234
   Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
+  SVProgressHUD: de812b4f0e1d65358f0064416473174ae619843f
 
-PODFILE CHECKSUM: 19438ba93dcc1518fdcb9fdf5efd7893ebab3573
+PODFILE CHECKSUM: 3c1a0bfadf475b04d9371c0d6736f76c4e507df4
 
 COCOAPODS: 1.10.1

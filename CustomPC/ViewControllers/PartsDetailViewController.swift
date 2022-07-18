@@ -1,5 +1,7 @@
 import UIKit
+
 import Nuke
+import SVProgressHUD
 
 class PartsDetailViewController: UIViewController{
     
@@ -161,6 +163,7 @@ class PartsDetailViewController: UIViewController{
     }
     
     @IBAction func didTapSearch(_ sender: Any) {
+        SVProgressHUD.show()
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "PartsWebViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "PartsWebViewController")as! PartsWebViewController
