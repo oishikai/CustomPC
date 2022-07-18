@@ -9,6 +9,7 @@ import UIKit
 
 import Alamofire
 import Kanna
+import SVProgressHUD
 
 class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
     
@@ -40,6 +41,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        SVProgressHUD.show()
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "PartsDetailViewController", bundle: nil)
             let nextVC = storyboard.instantiateViewController(identifier: "PartsDetailViewController")as! PartsDetailViewController
@@ -49,6 +51,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
                 nextVC.storedCustom = custom
             }
             tableView.deselectRow(at: indexPath, animated: true)
+            SVProgressHUD.dismiss()
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
@@ -56,6 +59,7 @@ class SearchPartsViewController: UIViewController,UITableViewDelegate, UITableVi
 
 extension SearchPartsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        SVProgressHUD.show()
         guard !(searchBar.text?.isEmpty ?? true) else { return }
         searchBar.resignFirstResponder()
         let word = searchBar.text!
@@ -63,6 +67,17 @@ extension SearchPartsViewController: UISearchBarDelegate {
             self.pcPartsSeq = parts
             DispatchQueue.main.async {
                 self.searchTable.reloadData()
+                SVProgressHUD.dismiss()
+                
+                if parts.count == 0 {
+                    let alert = UIAlertController(title: "該当するパーツがありません", message: "検索ワードを確認してください", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .cancel) { (acrion) in
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    alert.addAction(ok)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
             }
         }
     }
